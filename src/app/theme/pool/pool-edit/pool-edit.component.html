@@ -1,0 +1,28 @@
+<app-card [title]="'Editar Piscina'">
+    <h4>Editar Piscina : {{ pool.code }}</h4>
+    <form class="form-material" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="form-group form-default form-static-label">
+            <input name="name" type="text" class="form-control" required="" [(ngModel)]="pool.code">
+            <span class="form-bar"></span>
+            <label class="float-label">Codigo</label>
+        </div>
+        <div class="form-group form-default form-static-label">
+            <input name="businessId" ngModel type="text" class="form-control" required="" [(ngModel)]="pool.description">
+            <span class="form-bar"></span>
+            <label class="float-label">Descripcion</label>
+        </div>
+        <div class="form-group form-default form-static-label">
+            <!-- <input name="description" ngModel type="text" class="form-control" required="" [(ngModel)]="pool.farm.name">
+            <span class="form-bar"></span> -->
+            <h6>Camaronera</h6>
+            <select class="form-control form-control-default" [(ngModel)]="pool.farm" [ngModelOptions]="{standalone: true}">
+              <option [ngValue]="farm" *ngFor="let farm of farms">{{farm.name}}</option>
+            </select>
+        </div>
+    </form>
+    <div class="app-modal-footer">
+        <!-- <button type="button" class="btn btn-success alert-success-msg m-b-10 ripple light" (click)=openSuccessCancelSwal() style="float: right">Guardar cambios</button> -->
+        <button type="button" class="btn btn-success alert-success-msg m-b-10 ripple light" (click)="openSuccessCancelSwal()" style="float: right">Guardar cambios</button>
+        <button type="button" class="btn btn-default ripple" routerLink="/pool">Regresar</button>
+    </div>
+</app-card>

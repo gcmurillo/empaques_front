@@ -1,0 +1,32 @@
+[
+    {
+        "nombre": "Juana Rodriquez",
+        "rol": "Administracion",
+        "empresa": "Pepita S.A.",
+        "camaronera": "Camarones 1"
+    },
+    {
+        "nombre": "Claudine Neal",
+        "rol": "Administracion",
+        "empresa": "Biof EEDER",
+        "camaronera": "Camarones 555"
+    },
+    {
+        "nombre": "Beryl Rice",
+        "rol": "Dueno",
+        "empresa": "Carminosca",
+        "camaronera": "Shirmps 593"
+    },
+    {
+        "nombre": "Wilder Gonzales",
+        "rol": "Obrero",
+        "empresa": "The last One",
+        "camaronera": "CamEcu"
+    },
+    {
+        "nombre": "Carol Moran",
+        "rol": "Obrero",
+        "empresa": "The last One",
+        "camaronera": "CamEcu"
+    }
+]

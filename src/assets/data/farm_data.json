@@ -1,0 +1,32 @@
+[
+    {
+        "name": "campamento lola",
+        "size": "120",
+        "pools": "10",
+        "ubication": "machala sector perimetral"
+    },
+    {
+        "name": "easyCam",
+        "size": "100",
+        "pools": "25",
+        "ubication": "guayaquil entrada la 8"
+     },
+    {
+        "name": "Beryl Rice",
+        "size": "Dueno",
+        "pools": "Carminosca",
+        "ubication": "Shirmps 593"
+    },
+    {
+        "name": "Wilder Gonzales",
+        "size": "Obrero",
+        "pools": "The last One",
+        "ubication": "CamEcu"
+    },
+    {
+        "name": "Carol Moran",
+        "size": "Obrero",
+        "pools": "The last One",
+        "ubication": "CamEcu" 
+    }
+]

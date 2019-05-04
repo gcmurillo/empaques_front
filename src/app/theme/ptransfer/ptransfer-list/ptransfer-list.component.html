@@ -1,0 +1,21 @@
+<div class="page-body">
+  <div class="row">
+    <div class="col-sm-6">
+      <app-card [title]="'Grafico de Piscinas'" [headerContent]="'Grafico de supervivencia de animales'">
+        <google-chart [data]="stackingAreaChartData"></google-chart>
+      </app-card>
+    </div>
+
+    <!-- <div class="col-sm-6">
+      <app-card [title]="'Grafico de Cosechas'" [headerContent]="'Lorem ipsum dolor sit amet, consectetur adipisicing elit'">
+        <google-chart [data]="barChartData"></google-chart>
+      </app-card>
+    </div> -->
+
+    <div class="col-sm-6">
+      <app-card [title]="'Cosechas'" [headerContent]="'Gráfico de Cosechas por usuario'">
+        <google-chart [data]="donutChartData"></google-chart>
+      </app-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<app-card [title]="'Camaroneras'">
+    <div class="card-block" style="height: 900px">
+        <div class="row">
+            <div class="col-md-6 button-page">
+                <button [routerLink]="['/farm/farm-create']" class=" btn btn-primary light">Nuevo</button>
+                <button class=" btn btn-danger ripple" [disabled]="selected.length === 0" (click)="delete(selected)">Eliminar</button>
+            </div>
+            <div id="table-search" class="col-md-6">
+                <label>Search:
+                  <input
+                  type='text'
+                  style='padding:5px;margin:5px auto;width:60%;'
+                  placeholder='Search by name'
+                  (keyup)='updateFilter($event)'
+                  />
+                </label>
+            </div>
+        </div>
+        <ngx-datatable
+        class="material"
+        style="height: auto"
+        [rows]="rows"
+        [columnMode]="'force'"
+        [scrollbarH]="false"
+        [headerHeight]="50"
+        [footerHeight]="0"
+        [limit]="20"
+        [rowHeight]="'auto'"
+        [selected]="selected"
+        [selectionType]="'checkbox'"
+        [selectionType]="'single'"
+        (activate)="onActivate($event)"
+        (dblclick)="modalInformation.show()"
+        (select)='onSelect($event)'>
+            <ngx-datatable-column [width]="50" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+                <ng-template class="datatable-checkbox" ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                    <div class="checkbox-fade fade-in-default datatable-header-cell-label">
+                      <label>
+                        <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)"/>
+                        <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                      </label>
+                    </div>
+
+                  </ng-template>
+                  <ng-template class="datatable-checkbox" ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                    <div class="checkbox-fade fade-in-default datatable-header-cell-label">
+                      <label>
+                        <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)"/>
+                        <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                      </label>
+                    </div>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Nombre" prop="name"></ngx-datatable-column>
+            <!-- <ngx-datatable-column name="Ubicacion" prop="locate"></ngx-datatable-column> -->
+            <ngx-datatable-column name="Empresa" prop="company.name"></ngx-datatable-column>
+            <ngx-datatable-column name="Area" prop="area"></ngx-datatable-column>
+            <ngx-datatable-column name="Detalle" prop="detail"></ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+    <app-modal-basic #modalInformation>
+        <div class="app-modal-header">
+            <h2 class="modal-title">Informacion</h2>
+            <button type="button" class="close basic-close" (click)="modalInformation.hide()" (click)="clean_modal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="app-modal-body">
+            <h4>Detalle</h4>
+            <br>
+            <form class="form-material" action="javascript:">
+                <div class="form-group form-default form-static-label">
+                  <input type="text" class="form-control" required="" value="{{ farm_name }}" readonly>
+                  <span class="form-bar"></span>
+                  <label class="float-label">Nombre</label>
+                </div>
+                <div class="form-group form-default form-static-label">
+                  <input type="text" class="form-control" required="" value="{{ farm_detail }}" readonly>
+                  <span class="form-bar"></span>
+                  <label class="float-label">Detalle</label>
+                </div>
+                <!-- <div class="form-group form-default form-static-label">
+                  <input type="text" class="form-control" required="" value="{{ farm_locate }}" readonly>
+                  <span class="form-bar"></span>
+                  <label class="float-label">Ubicacion</label>
+                </div> -->
+                <div class="form-group form-default form-static-label">
+                  <input type="number" class="form-control" required="" value="{{ farm_area }}" readonly>
+                  <span class="form-bar"></span>
+                  <label class="float-label">Area</label>
+                </div>
+            </form>
+            <div class="app-modal-footer">
+                <button type="button" class="btn btn-primary ripple light" style="float: right" routerLink="/farm/farm-edit/{{ farm_id }}">Editar</button>
+                <button type="button" class="btn btn-default ripple" (click)="modalInformation.hide()" (click)="clean_modal()">Close</button>
+            </div>
+        </div>
+    </app-modal-basic>
+</app-card>

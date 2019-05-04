@@ -1,0 +1,100 @@
+<app-card [title]="'Politicas'">
+    <div class="card-block" style="height: 900px">
+        <div class="row">
+            <div class="col-md-6 button-page">
+                <button [routerLink]="['/policies/policies-create']" class=" btn btn-primary light">Nuevo</button>
+                <button class=" btn btn-danger ripple" [disabled]="selected.length === 0" (click)="openSuccessCancelSwal(selected)">Eliminar</button>
+            </div>
+            <div id="table-search" class="col-md-6">
+                <label>Search:
+                  <input
+                  type='text'
+                  style='padding:5px;margin:5px auto;width:60%;'
+                  placeholder='Search by name'
+                  (keyup)='updateFilter($event)'
+                  />
+                </label>
+            </div>
+        </div>
+        <ngx-datatable
+        class="material"
+        style="height: auto"
+        [rows]="rows"
+        [columnMode]="'force'"
+        [scrollbarH]="true"
+        [headerHeight]="50"
+        [footerHeight]="0"
+        [limit]="10"
+        [rowHeight]="'auto'"
+        [selected]="selected"
+        [selectionType]="'checkbox'"
+        [selectionType]="'single'"
+        (activate)="onActivate($event)"
+        (dblclick)="modalInformation.show()"
+        (select)='onSelect($event)'>
+            <ngx-datatable-column [width]="50" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+                <ng-template class="datatable-checkbox" ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                    <div class="checkbox-fade fade-in-default datatable-header-cell-label">
+                      <label>
+                        <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)"/>
+                        <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                      </label>
+                    </div>
+                  </ng-template>
+                  <ng-template class="datatable-checkbox" ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                    <div class="checkbox-fade fade-in-default datatable-header-cell-label">
+                      <label>
+                        <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)"/>
+                        <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                      </label>
+                    </div>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Name"></ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+    <app-modal-basic #modalInformation>
+        <div class="app-modal-header">
+            <h2 class="modal-title">Informacion</h2>
+            <button type="button" class="close basic-close" (click)="modalInformation.hide()" (click)="clean_modal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="app-modal-body">
+            <h4>Detalle</h4>
+            <br>
+            <form class="form-material" action="javascript:">
+                <div class="form-group form-default form-static-label">
+                  <input type="text" class="form-control" required="" value="{{ policie_name }}" readonly>
+                  <span class="form-bar"></span>
+                  <label class="float-label">Nombre</label>
+                </div>
+            </form>
+            <form class="form-material" action="javascript:">
+                <h5>Statements</h5>
+                <div class="form-group form-default form-static-label">
+                    <table class="table" *ngIf="policie !== null">
+                      <thead>
+                      <tr>
+                        <th>Effect</th>
+                        <th>Action</th>
+                        <th>Resources</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let statement of policie.statements">
+                        <td>{{ statement.effect }}</td>
+                        <td>{{ statement.action }}</td>
+                        <td>{{ statement.resources }}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                </div>
+            </form>
+            <div class="app-modal-footer">
+                <button type="button" class="btn btn-primary ripple light" style="float: right" routerLink="/policies/policies-edit/{{ policie_id }}">Editar</button>
+                <button type="button" class="btn btn-default ripple" (click)="modalInformation.hide()" (click)="clean_modal()">Close</button>
+            </div>
+        </div>
+    </app-modal-basic>
+</app-card>

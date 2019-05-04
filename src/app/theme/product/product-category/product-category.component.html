@@ -1,0 +1,158 @@
+<app-card [title]="'Categorias'">
+    <div class="card-block" style="height: 900px">
+        <div class="row">
+            <div class="col-md-6 button-page">
+                <button (click)="modalCreateCategory.show()" class=" btn btn-primary light">Nuevo</button>
+                <button class=" btn btn-danger ripple" [disabled]="selected.length === 0" (click)="delete(selected)">Eliminar</button>
+            </div>
+            <div id="table-search" class="col-md-6">
+                <label>Search:
+                  <input
+                  type='text'
+                  style='padding:5px;margin:5px auto;width:60%;'
+                  placeholder='Buscar'
+                  (keyup)='updateFilter($event)'
+                  />
+                </label>
+            </div>
+        </div>
+        <ngx-datatable
+        class="material expandable"
+        [rows]="rows"
+        [groupRowsBy]="'parent'"
+        [columnMode]="'force'"
+        [scrollbarH]="true"
+        [headerHeight]="50"
+        [footerHeight]="0"
+        [rowHeight]="40"
+        [limit]="4"
+        [groupExpansionDefault]="true"
+        [rowClass]="getRowClass"
+        [selected]="selected"
+        [selectionType]="'checkbox'"
+        [selectionType]="'single'"
+        (activate)="onActivate($event)"
+        (dblclick)="modalInformation.show()"
+        (select)='onSelect($event)'>
+      <ngx-datatable-group-header [rowHeight]="50" #myGroupHeader (toggle)="onDetailToggle($event)">
+        <ng-template let-group="group" let-expanded="expanded" ngx-datatable-group-header-template>
+          <div style="padding-left:5px;">
+            <a
+              href="#"
+              [class.datatable-icon-right]="!expanded"
+              [class.datatable-icon-down]="expanded"
+              title="Expand/Collapse Group"
+              (click)="toggleExpandGroup(group)">
+              <b>Categoria: {{group.value[0].parent}}-{{getCategoryName(group)}} </b>
+            </a>
+          </div>
+        </ng-template>
+    </ngx-datatable-group-header>
+            <ngx-datatable-column [width]="50" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+                <ng-template class="datatable-checkbox" ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                    <div class="checkbox-fade fade-in-default datatable-header-cell-label">
+                      <label>
+                        <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)"/>
+                        <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                      </label>
+                    </div>
+
+                  </ng-template>
+                  <ng-template class="datatable-checkbox" ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                    <div class="checkbox-fade fade-in-default datatable-header-cell-label">
+                      <label>
+                        <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)"/>
+                        <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                      </label>
+                    </div>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Nombre" prop="name"  ></ngx-datatable-column>
+            <ngx-datatable-column name="Codigo" prop="code"   ></ngx-datatable-column>
+            <ngx-datatable-column name="Detalle" prop="detail"  ></ngx-datatable-column>
+            <!-- <ngx-datatable-column name="Brand"></ngx-datatable-column> -->
+        </ngx-datatable>
+    </div>
+    <app-modal-basic #modalInformation>
+        <div class="app-modal-header">
+            <h2 class="modal-title">Informacion</h2>
+            <button type="button" class="close basic-close" (click)="modalInformation.hide()" (click)="clean_modal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="app-modal-body">
+            <h4>Detalle</h4>
+            <br>
+            <form class="form-material" action="javascript:">
+                <div class="form-group form-default form-static-label">
+                  <input type="text" class="form-control" required="" value="{{ category_name }}" >
+                  <span class="form-bar"></span>
+                  <label class="float-label">Nombre</label>
+                </div>
+                <div class="form-group form-default form-static-label">
+                  <input type="text" class="form-control" required="" value="{{ category_code }}" >
+                  <span class="form-bar"></span>
+                  <label class="float-label">Code</label>
+                </div>
+                <div class="form-group form-default form-static-label">
+                  <input type="text" class="form-control" required="" value="{{ category_detail }}">
+                  <span class="form-bar"></span>
+                  <label class="float-label">descripcion</label>
+                </div>
+                <!-- <div class="form-group form-default form-static-label">
+                  <input type="text" class="form-control" required="" value="{{ product_detail }}" readonly>
+                  <span class="form-bar"></span>
+                  <label class="float-label">detalles</label>
+                </div> -->
+            </form>
+            <div class="app-modal-footer">
+                <button type="button" class="btn btn-primary ripple light" style="float: right"  (click)=openSuccessCancelSwal()>Guardar</button>
+                <button type="button" class="btn btn-default ripple" (click)="modalInformation.hide()" (click)="clean_modal()">Close</button>
+            </div>
+        </div>
+    </app-modal-basic>
+    <app-modal-basic #modalCreateCategory>
+        <div class="app-modal-header">
+            <h2 class="modal-title">Nueva Ctegoria</h2>
+            <button type="button" class="close basic-close" (click)="modalCreateCategory.hide()" (click)="clean_modal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="app-modal-body">
+            <h4>Detalle</h4>
+            <br>
+            <form class="form-material" action="javascript:">
+              <div class="border-checkbox-section ">
+                <div class="border-checkbox-group border-checkbox-group-primary" align="center">
+                  <input class="border-checkbox" type="checkbox" id="checkbox1" (change)= "changeValue()" >
+                  <label class="border-checkbox-label" for="checkbox1">Subcategoria</label>
+                </div>
+              </div>
+              <form [formGroup]="categoryForm" >
+                <select  *ngIf="showCategories" [(ngModel)]="categorySelected" (change)= "setCategory(categorySelected)" [ngModelOptions]="{standalone: true}" >
+                  <option [ngValue]="category" *ngFor="let category of categories">{{category.name}}</option>
+                </select>
+              </form>
+              <div class="form-group form-default">
+                <input [(ngModel)]="category_name" type="text" name="name" class="form-control" required="">
+                <span class="form-bar"></span>
+                <label class="float-label">Nombre</label>
+              </div>
+              <div class="form-group form-default">
+                <input [(ngModel)]="category_code" type="text" name="code" class="form-control" required="">
+                <span class="form-bar"></span>
+                <label class="float-label"> codigo</label>
+              </div>
+              <div class="form-group form-default">
+                <input [(ngModel)]="category_detail" type="text" name="detail" class="form-control" required="">
+                <span class="form-bar"></span>
+                <label class="float-label"> detalles</label>
+              </div>
+            </form>
+            <div class="app-modal-footer">
+                <button type="button" class="btn btn-primary ripple light" style="float: right" (click)="openSuccessSwal()" (click)="clean_modal()" (click)="modalCreateCategory.hide()" >Crear</button>
+                <button type="button" class="btn btn-default ripple" (click)="modalCreateCategory.hide()" (click)="clean_modal()">Close</button>
+            </div>
+        </div>
+    </app-modal-basic>
+</app-card>

@@ -1,0 +1,228 @@
+<app-card [title]="'Nuevo Ingreso'">
+  <div class="row">
+    <div class="col-4">
+      <h4>Formulario de ingreso</h4>
+    </div>
+    <div class="col-4">
+      <form class="form-material" action="javascript:">
+        <div class="border-checkbox-section ">
+          <div class="border-checkbox-group border-checkbox-group-primary" align="center">
+            <input class="border-checkbox" type="checkbox" id="checkbox1" (change)= "changeValue()" >
+            <label class="border-checkbox-label" for="checkbox1">Por Ajuste</label>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-4">
+      <form class="form-inline" action="javascript:">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="modelPopup" ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+              <span class="input-group-text" (click)="d.toggle()">
+                <i class="icofont icofont-ui-calendar"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+    <div class="card-block"  >
+      <div class="row">
+        <div class="col-md-12 col-xl-12 ">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-xl-2" >
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-12 col-xl-12">
+                  <form [formGroup]="companyForm" action="javascript:">
+                    <ng-select
+                    class="material"
+                    [items]="companies"
+                    bindValue="_id"
+                    bindLabel="name"
+                    placeholder="seleccione compania"
+                    [(ngModel)]="companySelected"
+                    (change)="getformValue()"
+                    [ngModelOptions]="{standalone: true}" >
+                    </ng-select>
+                  </form>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-12 col-xl-12">
+                  <form [formGroup]="companyForm" action="javascript:">
+                    <ng-select
+                    class="material"
+                    [items]="warehouses"
+                    bindValue="id"
+                    bindLabel="name"
+                    placeholder="selecione bodega"
+                    [(ngModel)]="warehouseSelected"
+                    (change)="getformValue()"
+                    [ngModelOptions]="{standalone: true}">
+                    </ng-select>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-9 col-xl-10">
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-12 col-xl-12">
+                  <form  [formGroup]="companyForm" action="javascript:">
+                    <div class="form-material" >
+                      <input type="text" name="companyName" class="form-control" required=""  value="{{companyNameSelected}}"readonly>
+                      <span class="form-bar"></span>
+                      <label class="float-label-sm">Empresa</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-12 col-xl-12">
+                  <form  [formGroup]="companyForm" action="javascript:">
+                    <div class="form-material" >
+                      <input type="text" name="warehouseName" class="form-control" required="" value="{{warehouseNameSelected}}"readonly>
+                      <span class="form-bar"></span>
+                      <label class="float-label-sm" >Bodega</label>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div *ngIf="!showIncomeForm">
+            <div class="row">
+              <div class="col-md-4 col-xl-3">
+                <form class="form-material" action="javascript:">
+                  <div class="form-group form-default ">
+                    <input type="text" name="RUC" class="form-control" required="">
+                    <span class="form-bar"></span>
+                    <label class="float-label">No de factura o nota de venta</label>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-8 col-xl-9">
+                <form class="form-material " action="javascript:">
+                  <div class="form-group form-default ">
+                    <input type="text" name="RUC" class="form-control" required="">
+                    <span class="form-bar"></span>
+                    <label class="float-label">Proveedor</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+      <div class="col-12">
+        <div >
+          <form class="form-material form-static-label" action="javascript:">
+            <div class="form-group form-default">
+              <input type="text" name="RUC" class="form-control" required="" (keyup)='updateFilter($event)'>
+              <span class="form-bar"></span>
+              <label class="float-label">BUSCAR</label>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-12" style=" padding: unset;">
+        <ngx-datatable
+        class="material"
+        [rows]="rows"
+        columnMode="force"
+        [headerHeight]="50"
+        [footerHeight]="0"
+        [rowHeight]="50"
+        [scrollbarV]="true"
+        [selected]="selected"
+        [selectionType]="'single'"
+        (activate)="onActivate($event)">
+        <ngx-datatable-column name="Nombre" prop="name" ></ngx-datatable-column>
+        <ngx-datatable-column name="presentacion" prop="quantity" ></ngx-datatable-column>
+        <ngx-datatable-column name="Marca" prop="brand"></ngx-datatable-column>
+        <ngx-datatable-column name="Unidad de consumo" prop="consumeUnit" ></ngx-datatable-column>
+        <ngx-datatable-column style="padding: 5px;" [width]="60" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+          <ng-template let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+          <div>
+            <button type="button" class="center btn-xs btn-success alert-success-msg ripple light" (click)="setSelectedProduct(row)" style="align: center;"><i class="icofont icofont-ui-add"></i></button>
+          </div>
+        </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div style="padding: 1.25rem;">
+      <div *ngFor='let ingreso of ingresos'>
+        <form class="form-material" action="javascript:">
+          <div class="form-group form-default ">
+            <div class="row" style="padding: -15px;">
+            <div class="col-11">
+              <div class="row">
+                <div class="col-6">
+                  <div class="row">
+                    <div class="col-md-4 col-xl-4 " style="padding: 2px;">
+                      <input type="text" name="description" class="form-control" required="" value="{{ingresos[ingresos.indexOf(ingreso)].value.product._id}}">
+                      <span class="form-bar"></span>
+                      <label class="float-label-sm">Codigo</label>
+                    </div>
+                    <div class="col-md-8 col-xl-8 " style="padding: 2px;">
+                      <input type="text" name="description" class="form-control" required=""
+                      value="{{ingresos[ingresos.indexOf(ingreso)].value.product.name}}, {{ingresos[ingresos.indexOf(ingreso)].value.product.quantity}}"
+                            readonly>
+                      <span class="form-bar"></span>
+                      <label class="float-label-sm">descripcion</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6" *ngIf="!showIncomeForm">
+                  <div class="row">
+                    <div class="col-md-4 col-xl-4 " style="padding: 2px;">
+                      <input [(ngModel)]="ingresos[ingresos.indexOf(ingreso)].value.quantity" type="text" name="incomeQuantity" class="form-control" required="" value="">
+                      <span class="form-bar"></span>
+                      <label class="float-label-sm">Cantidad</label>
+                    </div>
+                    <div class="col-md-4 col-xl-4 " style="padding: 2px;">
+                      <input [(ngModel)]="ingresos[ingresos.indexOf(ingreso)].value.price" type="text" name="incomePrice" class="form-control" required="" value="">
+                      <span class="form-bar"></span>
+                      <label class="float-label-sm">Precio</label>
+                    </div>
+                    <div class="col-md-4 col-xl-4 " style="padding: 2px;">
+                      <input [(ngModel)]="ingresos[ingresos.indexOf(ingreso)].value.total" type="text" name="incomeTotal" class="form-control" required="" value="{{(ingreso.value.quantity*ingreso.value.price)}}">
+                      <span class="form-bar"></span>
+                      <label class="float-label-sm">Total</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6" *ngIf="showIncomeForm">
+                  <div class="row">
+                    <div class="col-md-4 col-xl-4 " style="padding: 2px;">
+                      <input [(ngModel)]="ingresos[ingresos.indexOf(ingreso)].value.quantity" type="text" name="incomeQuantity" class="form-control" required="" value="">
+                      <span class="form-bar"></span>
+                      <label class="float-label-sm">CantidadS</label>
+                    </div>
+                    <div class="col-md-4 col-xl-4 " style="padding: 2px;">
+                      <input [(ngModel)]="ingresos[ingresos.indexOf(ingreso)].value.priceStock" type="text" name="priceStock" class="form-control" required="" value="" readonly>
+                      <span class="form-bar"></span>
+                      <label class="float-label-sm">PrecioS</label>
+                    </div>
+                    <div class="col-md-4 col-xl-4 " style="padding: 2px;">
+                      <input [(ngModel)]="ingresos[ingresos.indexOf(ingreso)].value.totalStock" type="text" name="totalStock" class="form-control" required="" value="{{(ingreso.value.quantity*ingreso.value.priceStock)}}" readonly>
+                      <span class="form-bar"></span>
+                      <label class="float-label-sm">TotalS</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-xl-1" style="padding-top: 15px; padding-left:15px;">
+                    <div >
+                      <button style= "float: right" class=" center btn-sm btn-danger ripple" (click)=removeForm(ingreso) ><i class="icofont icofont-ui-delete"></i></button>
+                    </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-success alert-success-msg m-b-10 ripple light"  (click)=onSubmit()  style="float: right">Guardar cambios</button>
+        <button type="button" class="btn btn-default ripple" routerLink="/product/product-list">Regresar</button>
+    </div>
+</app-card>

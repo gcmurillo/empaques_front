@@ -1,0 +1,134 @@
+<app-card [title]="'Nueva Siembra'">
+  <wizard #wizard class="arc-wizard">
+    <wizard-step stepTitle="Informacion">
+      <div>
+        <div>
+          <div class="centered-content">
+            <h3>Información de nueva Siembra</h3>
+            <p>Información</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h5>Información General</h5>
+            </div>
+            <div class="card-block">
+              <form class="form-material" action="javascript:">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group form-default">
+                      <input #sowingDensityOfAnimals type="text" name="sowingDensityOfAnimals" class="form-control" required="">
+                      <span class="form-bar"></span>
+                      <label class="float-label">Densidad de Animales</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group form-default">
+                      <input #sowingWaterParameters type="text" name="sowingWaterParameters" class="form-control" required="">
+                      <span class="form-bar"></span>
+                      <label class="float-label">Parametros de Agua</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group form-default">
+                      <input #sowingInitialWeight type="text" name="sowingInitialWeight" class="form-control" required="">
+                      <span class="form-bar"></span>
+                      <label class="float-label">Peso Inicial</label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group form-default">
+                      <input #sowingPathogens type="text" name="sowingPathogens" class="form-control" required="">
+                      <span class="form-bar"></span>
+                      <label class="float-label">Patógenos</label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group form-default">
+                      <input #sowingWaterAnalysis type="text" name="sowingWaterAnalysis" class="form-control" required="">
+                      <span class="form-bar"></span>
+                      <label class="float-label">Analisis de Agua</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group form-default">
+                      <input #sowingFoods ngModel type="text" class="form-control" name="sowingFoods" required="">
+                      <span class="form-bar"></span>
+                      <label class="float-label">Alimentos</label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group form-default">
+                      <input #sowingFertilizer ngModel type="text" class="form-control" name="sowingFertilizer" required="">
+                      <span class="form-bar"></span>
+                      <label class="float-label">Fertilizantes</label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group form-default">
+                      <input #sowingOperatingCost ngModel type="text" class="form-control" name="sowingOperatingCost" required="">
+                      <span class="form-bar"></span>
+                      <label class="float-label">Costos Operativos</label>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="btn-group mt-10" class="centered-content">
+          <button type="button" class="btn btn-primary btn-sm" nextStep>Siguiente</button>
+        </div>
+      </div>
+    </wizard-step>
+    <wizard-step stepTitle="Piscina">
+      <div class="centered-content">
+        <div>
+          <h3>Asignacion de Pisicina</h3>
+          <p>Asigne la piscina donde se realizará la siembra</p>
+        </div>
+        <ngx-datatable 
+          class="data-table"
+          style="height:auto; text-align:left"
+          [rows]="nodes"
+          [columnMode]="'force'"
+          [scrollbarH]="true"
+          [headerHeight]="50"
+          [footerHeight]="0"
+          [rowHeight]="'auto'"
+          [selectionType]="'single'"
+          (select)='onSelectTableResources($event)'>
+          <ngx-datatable-column name="Código de Piscina" prop="poolId"></ngx-datatable-column>
+          <ngx-datatable-column name="Nombre de Piscina" prop="poolName"></ngx-datatable-column>
+        </ngx-datatable>
+        <div class="btn-group mt-10" class="centered-content">
+          <button type="button" class="btn btn-secondary btn-sm" previousStep>Retroceder un paso</button>
+          <button type="button" class="btn btn-primary btn-sm" nextStep>Siguiente</button>
+        </div>
+      </div>
+    </wizard-step>
+    <wizard-step stepTitle="verificacion">
+      <div class="centered-content">
+        <div>
+          <h3>Resumen</h3>
+          <p><b>Densidad de Animales:</b> {{ sowingDensityOfAnimals.value }}</p>
+          <p><b>Parametros de Agua:</b> {{ sowingWaterParameters.value }}</p>
+          <p><b>Peso Inicial:</b> {{ sowingInitialWeight.value }}</p>
+          <p><b>Patogenos:</b> {{ sowingPathogens.value }}</p>
+          <p><b>Analisis de Agua:</b> {{ sowingWaterAnalysis.value }}</p>
+          <p><b>Alimentos:</b> {{ sowingFoods.value }}</p>
+          <p><b>Fertilizante:</b> {{ sowingFertilizer.value }}</p>
+          <p><b>Costo Operativo:</b> {{ sowingOperatingCost.value }}</p>
+          <p style="padding: 10px"><b>Piscina:</b> {{ resource_prede_name }}</p>
+        </div>
+        <div class="btn-group mt-10">
+          <button type="button" class="btn btn-secondary btn-sm" previousStep>Retroceder un paso</button>
+          <button [routerLink]="['/sowing']" class=" btn btn-primary light btn-sm" (click)="openSuccessSwal()">Confirmar</button>
+        </div>
+      </div>
+    </wizard-step>
+  </wizard>
+</app-card>

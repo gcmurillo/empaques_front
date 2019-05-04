@@ -1,0 +1,9 @@
+.not-active {
+    pointer-events: none;
+    cursor: default;
+}
+
+.page-block {
+    padding-top: 0;
+    padding-bottom: 0;
+}

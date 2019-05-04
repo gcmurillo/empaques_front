@@ -1,0 +1,77 @@
+<app-card [title]="'Politica'">
+    <wizard #wizard class="arc-wizard">
+      <wizard-step stepTitle="Informacion Inicial">
+        <div>
+          <div>
+            <div class="centered-content">
+              <h3>Nueva Politica</h3>
+              <p>Creacion</p>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h5>Informacion Inicial</h5>
+                </div>
+              <div class="card-block">
+                <form class="form-material" action="javascript:">
+                  <div class="row">
+                    <div class="col-md-6 col-xl-12 ">
+                      <div class="form-group form-default">
+                        <input #name type="text" name="name" class="form-control" required="">
+                        <span class="form-bar"></span>
+                        <label class="float-label">Nombre de la politica</label>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-6 col-xl-12 ">
+                      <div class="form-group form-default">
+                        <div class="row">
+                            <div class="col-sm-12 col-xl-3 m-b-30">
+                              <h4 class="sub-title">Servicio</h4>
+                              <select name="select" class="form-control form-control-default">
+                                  <option value="opt2">Empresas</option>
+                                  <option value="opt2">Usuarios</option>
+                                  <option value="opt2">Bodegas</option>
+                                  <option value="opt2">Camaroneras</option>
+                                  <option value="opt2">Inventario</option>
+                              </select>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="btn-group mt-10">
+            <button type="button" class="btn btn-primary btn-sm" nextStep>Continue</button>
+          </div>
+        </div>
+      </wizard-step>
+      <wizard-step stepTitle="Acciones">
+        <div class="centered-content">
+          <div class="col-xs-6 col-md-12 col-lg-12">
+            <h3>Acciones</h3>
+          </div>
+          <div class="btn-group mt-10">
+            <button type="button" class="btn btn-secondary btn-sm" previousStep>Back</button>
+            <button type="button" class="btn btn-primary btn-sm" nextStep>Continue</button>
+          </div>
+        </div>
+      </wizard-step>
+      <wizard-step stepTitle="Finished">
+        <div class="centered-content">
+          <div class="col-xs-6 col-md-12 col-lg-12">
+            <h3>Confirmacion</h3>
+          </div>
+          <div class="btn-group mt-10">
+            <button type="button" class="btn btn-secondary btn-sm" previousStep>Back</button>
+            <button type="button" class="btn btn-danger btn-sm" resetWizard>Reset</button>
+            <button [routerLink]="['/policies']" class=" btn btn-primary light btn-sm" (click)="openSuccessSwal()" >Confirmar</button>
+          </div>
+        </div>
+      </wizard-step>
+    </wizard>
+</app-card>

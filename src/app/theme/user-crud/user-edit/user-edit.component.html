@@ -1,0 +1,30 @@
+<app-card [title]="'Editar Usuario'">
+    <h4>Editar usuario : {{ user.name }}</h4>
+    <br>
+    <form class="form-material" action="javascript:">
+        <div class="form-group form-default form-static-label">
+          <input type="text" class="form-control" required="" value="{{ user.name }}">
+          <span class="form-bar"></span>
+          <label class="float-label">Nombre</label>
+        </div>
+        <div class="form-group form-default form-static-label">
+          <input type="text" class="form-control" required="" value="{{ user.email }}">
+          <span class="form-bar"></span>
+          <label class="float-label">Email</label>
+        </div>
+        <div class="form-group form-default form-static-label">
+          <input type="text" class="form-control" required="" value="{{ user.company }}" readonly disabled>
+          <span class="form-bar"></span>
+          <label class="float-label">Empresa</label>
+        </div>
+        <div class="form-group form-default form-static-label">
+          <input type="text" class="form-control" required="" value="{{ user.farm }}">
+          <span class="form-bar"></span>
+          <label class="float-label">Camaronera</label>
+        </div>
+    </form>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-success alert-success-msg m-b-10 ripple light" (click)=openSuccessCancelSwal() style="float: right">Guardar cambios</button>
+        <button type="button" class="btn btn-default ripple" routerLink="/users/">Regresar</button>
+    </div>
+</app-card>

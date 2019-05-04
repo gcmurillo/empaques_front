@@ -1,0 +1,32 @@
+[
+    {
+        /* "id": "1", */
+        "nombre": "camaronera A",
+        "RUC": "1548725124001",
+        "company": "Pepita S.A."
+    },
+    {
+        /* "id": "2", */
+        "nombre": "camaronera B",
+        "RUC": "3625147485001",
+        "company": "Biof EEDER"
+    },
+    {
+        /* "id": "3", */
+        "nombre": "camMax",
+        "RUC": "15487854512001",
+        "company": "Carminosca"
+    },
+    {
+        /* "id": "4", */
+        "nombre": "golCamar",
+        "RUC": "5566478541001",
+        "company": "The last One"
+    },
+    {
+        /* "id": "5", */
+        "nombre": "Carran",
+        "RUC": "1176875542001",
+        "company": "The last One"
+    }
+]

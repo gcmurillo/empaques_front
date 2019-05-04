@@ -1,0 +1,162 @@
+<app-card [title]="'Ciclos'">
+    <div class="card-block" style="height: 900px">
+  
+      <!-- Buscador -->
+      <div class="row">
+        <div id="table-search" class="col-md-6">
+          <label>Buscar:
+            <input
+              type='text'
+              style='padding:5px;margin:5px auto;width:60%;'
+              placeholder='Buscar'
+              (keyup)='searchFilter($event)'>
+          </label>
+        </div>
+      </div>
+  
+      <!-- Tabla de Ciclos -->
+      <ngx-datatable
+        class="material"
+        style="height: auto"
+        [rows]="rows"
+        [columnMode]="'force'"
+        [scrollbarH]="false"
+        [headerHeight]="50"
+        [footerHeight]="0"
+        [limit]="20"
+        [rowHeight]="'auto'"
+        [selected]="selected"
+        [selectionType]="'checkbox'"
+        [selectionType]="'single'"
+        (activate)="onActivate($event)"
+        (dblclick)="modalInformation.show()">
+          <!-- Informacion de cada columna -->
+          <ngx-datatable-column name="Identificador" prop="id"></ngx-datatable-column>
+          <ngx-datatable-column name="Inicio de Ciclo" prop="cycleStartDate"></ngx-datatable-column>
+          <ngx-datatable-column name="Camaronera Asignada" prop="cyclePool.farm.name"></ngx-datatable-column>
+          <ngx-datatable-column name="Piscina Asignada" prop="cyclePool.code"></ngx-datatable-column>
+          <ngx-datatable-column name="Estado del Ciclo" prop="cycleStatus"></ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  
+    <!-- Modal informacion de ciclo -->
+    <app-modal-basic #modalInformation>
+      <div class="app-modal-header">
+        <h2 class="modal-title">Información de Ciclo</h2>
+      </div>
+      <div class="app-modal-body">
+        <form class="form-material">
+          <div class="row">
+            <div class="form-group form-default form-static-label col-md-6">
+              <input type="text" class="form-control" value="{{ cycleStartDate }}" readonly>
+              <span class="form-bar"></span>
+              <label class="float-label">Identificador de Ciclo</label>
+            </div>
+            <div class="form-group form-default form-static-label col-md-6">
+              <input type="text" class="form-control" value="{{ cycleStatus }}" readonly>
+              <span class="form-bar"></span>
+              <label class="float-label">Estado Actual</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group form-default form-static-label col-md-6">
+              <input type="text" class="form-control" value="{{ cycleFarm }}" readonly>
+              <span class="form-bar"></span>
+              <label class="float-label">Camaronera Asignada</label>
+            </div>
+            <div class="form-group form-default form-static-label col-md-6">
+              <input type="text" class="form-control" value="{{ cyclePool }}" readonly>
+              <span class="form-bar"></span>
+              <label class="float-label">Piscina Asignada</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group form-default form-static-label col-md-6">
+              <input type="text" class="form-control" value="{{ cycleStartDate | date }}" readonly>
+              <span class="form-bar"></span>
+              <label class="float-label">Inicio del Ciclo</label>
+            </div>
+            <div class="form-group form-default form-static-label col-md-6">
+              <input type="text" class="form-control" value="{{ cycleSowingDate | date }}" readonly>
+              <span class="form-bar"></span>
+              <label class="float-label">Fecha de Cosecha</label>
+            </div>
+            <!-- <div class="form-group form-default form-static-label col-md-4">
+              <input type="text" class="form-control" value="{{ cyclePrevSowingDate }}" readonly>
+              <span class="form-bar"></span>
+              <label class="float-label">Dias para finalizar</label>
+            </div> -->
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <button class="btn btn-default ripple" (click)="modalInformation.hide()" (click)="clean_modal()">Cerrar</button>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-warning ripple light" *ngIf="cycleStatus">Pendiente</button>
+              <a 
+                routerLink="/sowing/sowing-create"
+                class="btn btn-success ripple light" 
+                *ngIf="!cycleStatus" 
+                disabled>Cosechar</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </app-modal-basic>
+
+    <!-- Modal para nuevo Ciclo -->
+    <app-modal-basic #modalNewCycle>
+      <div class="app-modal-header">
+        <h2 class="modal-title">Nuevo Ciclo</h2>
+      </div>
+      <div class="app-modal-body">
+        <form class="form-material">
+          <div class="form-group form-default form-static-label">
+            <input type="text" class="form-control" value="">
+            <span class="form-bar"></span>
+            <label class="float-label">Peso (Crecimiento)</label>
+          </div>
+          <div class="form-group form-default form-static-label">
+            <input type="text" class="form-control" value="">
+            <span class="form-bar"></span>
+            <label class="float-label">Densidad de Animales por Area</label>
+          </div>
+          <div class="form-group form-default form-static-label">
+            <input type="text" class="form-control" value="">
+            <span class="form-bar"></span>
+            <label class="float-label">Parametros de Agua</label>
+          </div>
+          <div class="form-group form-default form-static-label">
+            <input type="text" class="form-control" value="">
+            <span class="form-bar"></span>
+            <label class="float-label">Patogenos</label>
+          </div>
+          <div class="form-group form-default form-static-label">
+            <input type="text" class="form-control" value="">
+            <span class="form-bar"></span>
+            <label class="float-label">Analisis de Agua</label>
+          </div>
+          <div class="form-group form-default form-static-label">
+            <input type="text" class="form-control" value="">
+            <span class="form-bar"></span>
+            <label class="float-label">Alimentos</label>
+          </div>
+          <div class="form-group form-default form-static-label">
+            <input type="text" class="form-control" value="">
+            <span class="form-bar"></span>
+            <label class="float-label">Fertilizantes</label>
+          </div>
+          <div class="form-group form-default form-static-label">
+            <input type="text" class="form-control" value="">
+            <span class="form-bar"></span>
+            <label class="float-label">Costos Operativos</label>
+          </div>
+        </form>
+        <div class="app-modal-footer">
+          <button class="btn btn-default ripple" (click)="modalNewCycle.hide()" (click)="clean_modal()">Cancelar</button>
+        </div>
+      </div>
+    </app-modal-basic>
+  
+  </app-card>
+  

@@ -1,0 +1,92 @@
+/**
+Template Name: Material Able Admin Template
+Author: #
+Email: #
+File: style.css
+=============
+  == Table of Contents==
+	- Custom Css
+	- Generic classes
+		-	Margin, Padding, Font class, text align, position, floating, overflow, background class, text color, display class, boarder class
+	- Theme Elements
+		-	Accordion, Button, tabs, typography, buttons, box shadow, pagination, Basic card
+	- General Elements
+		-	Lable & Badges, Materialize general elements, Lables
+	- Pages
+		-   Progress bar, Chat , dark layout
+============= */
+// General theme contents
+
+@import '~bootstrap/scss/bootstrap';
+
+@import "partials/variables";
+@import "partials/mixins";
+@import "partials/general";
+@import "partials/generic";
+
+// Menu
+@import "partials/menu/menu";
+@import "partials/menu/horizontal-menu";
+
+// Important Theme elements
+@import "partials/theme-elements/button";
+@import "partials/theme-elements/form-elements";
+
+// Theme elements
+@import "partials/theme-elements/label-badges";
+
+// Tables
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import "partials/tables/tables";
+// @import "~@ng-select/ng-select/themes/default.theme.css ";
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+// Other
+@import "partials/other/chat";
+@import "partials/other/progress-bar";
+
+// Responsive css
+@import "partials/responsive/responsive";
+
+// dark layout css
+// dark layout css
+@import "partials/dark";
+
+//angular custom
+@import "partials/custom";
+
+
+.ngx-datatable,
+.info {
+  text-align: left;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.info {
+  box-sizing: border-box;
+  padding: 0 1em;
+  border: solid 1px #ccc;
+  background: white;
+  font-size: .8em;
+  margin-bottom: 1em;
+}
+
+.ngx-datatable.scroll-vertical {
+  height: 50vh;
+}
+
+.selected-column {
+  background: #FFF;
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+}
+
+// .my-custom-cell {
+//   background: rgba(0, 0, 0, 0.05);
+//   padding: 0px !important;
+//   border: 1px solid red;
+// }

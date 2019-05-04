@@ -1,0 +1,25 @@
+<app-card [title]="'Editar Camaronera'">
+    <h4>Editar camaronera : {{ farm.name }}</h4>
+    <br>
+    <form class="form-material" #f="ngForm">
+        <div class="form-group form-default form-static-label">
+          <input name="name" type="text" class="form-control" required="" [(ngModel)]="farm.name">
+          <span class="form-bar"></span>
+          <label class="float-label">Nombre</label>
+        </div>
+        <div class="form-group form-default form-static-label">
+          <input name="area" type="number" class="form-control" required="" [(ngModel)]="farm.area">
+          <span class="form-bar"></span>
+          <label class="float-label">Area</label>
+        </div>
+        <div class="form-group form-default form-static-label">
+          <input name="detail" type="text" class="form-control" required="" [(ngModel)]="farm.detail">
+          <span class="form-bar"></span>
+          <label class="float-label">Detalle</label>
+        </div>
+    </form>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-success alert-success-msg m-b-10 ripple light" (click)=update() style="float: right">Guardar cambios</button>
+        <button type="button" class="btn btn-default ripple" routerLink="/farm">Regresar</button>
+    </div>
+</app-card>
