@@ -1047,8 +1047,8 @@ const EMPAQUES_MENU = [
 @Injectable()
 export class MenuItems {
     getAll(): Menu[] {
-        // return MENUITEMS;
+        return MENUITEMS;
         // return MY_MENU;
-        return EMPAQUES_MENU;
+        // return EMPAQUES_MENU;
     }
 }
