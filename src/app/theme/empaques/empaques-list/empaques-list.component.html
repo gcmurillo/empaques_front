@@ -5,8 +5,19 @@
         <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Buscar por nombre">
     </div>
     <div class="card-header">
-        <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMyModal('effect-13')"> <i class="icofont icofont-plus m-r-5"></i> Nuevo
-        </button>
+        <div ngbDropdown class="btn-group dropdown-split-primary">
+          <button type="button" class="btn btn-primary light"><i class="icofont icofont-info-square"></i>Filtrar por tipo</button>
+          <button ngbDropdownToggle type="button" class="btn btn-primary dropdown-toggle-split light">
+            <span class="sr-only"></span>
+          </button>
+          <div ngbDropdownMenu>
+            <div *ngFor="let tipo of tipo_empaques">
+            <button class="dropdown-item ripple light" (click)="filtrar(tipo.id)">{{ tipo.nombre }}</button>
+            </div>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item ripple light" (click)="filtrar('TODO')">Todo</button>
+          </div>
+        </div>
     </div>
     <div class="card-body">
         <div class="table-content crm-table">

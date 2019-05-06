@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Empaque, EmpaqueDetail } from '../../../shared/empaque/empaque';
 import { EmpaquesService } from '../../../services/empaques/empaques.service';
+import { TipoEmpaquesService } from '../../../services/tipo_empaques/tipo_empaques.service';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class EmpaquesListComponent implements OnInit {
     rows = [];
     selected = [];
     empaques = [];
+    tipo_empaques = [];
 
     columns: any[] = [
         {
@@ -60,13 +62,36 @@ export class EmpaquesListComponent implements OnInit {
         },
     ];
 
-    constructor(private empaqueService: EmpaquesService) { }
+    constructor(private empaqueService: EmpaquesService,
+                private tipoEmpaqueService: TipoEmpaquesService) { }
 
     ngOnInit() {
         this.empaqueService.getEmpaques().subscribe(
-            empaques => this.empaques = empaques,
+            empaques => {
+                this.rows = empaques;
+                this.empaques = empaques;
+            },
             err => console.log('error: ' + err.status)
         );
+
+        this.tipoEmpaqueService.getTipoEmpaques().subscribe(
+            // tipos_empaques => this.tipo_empaques = tipo_empaques,
+            tipo_empaques => {
+                this.tipo_empaques = tipo_empaques;
+            },
+            err => console.log('error: ' + err.status)
+        );
+
+    }
+
+    filtrar(id) {
+        if (id === 'TODO') {
+            this.rows = this.empaques;
+        } else {
+            this.rows = this.empaques.filter(
+                empaque => empaque.tipo_empaque.id === id
+            );
+        }
     }
 
     onSelect({ selected }) {
