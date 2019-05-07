@@ -1,21 +1,47 @@
 <div class="card">
     <div class="card-header">
-        <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMyModal('effect-13')"> <i class="icofont icofont-plus m-r-5"></i> Nuevo
+        <button [routerLink]="['/empaques/empaques-create']" type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMyModal('effect-13')"> <i class="icofont icofont-plus m-r-5"></i> Nuevo
         </button>
         <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Buscar por nombre">
     </div>
     <div class="card-header">
-        <div ngbDropdown class="btn-group dropdown-split-primary">
+        <div ngbDropdown class="btn-group dropdown-split-primary" style="margin-right: 10px">
           <button type="button" class="btn btn-primary light"><i class="icofont icofont-info-square"></i>Filtrar por tipo</button>
           <button ngbDropdownToggle type="button" class="btn btn-primary dropdown-toggle-split light">
             <span class="sr-only"></span>
           </button>
           <div ngbDropdownMenu>
             <div *ngFor="let tipo of tipo_empaques">
-            <button class="dropdown-item ripple light" (click)="filtrar(tipo.id)">{{ tipo.nombre }}</button>
+            <button class="dropdown-item ripple light" (click)="filtrar_tipo(tipo.id)">{{ tipo.nombre }}</button>
             </div>
             <div class="dropdown-divider"></div>
-            <button class="dropdown-item ripple light" (click)="filtrar('TODO')">Todo</button>
+            <button class="dropdown-item ripple light" (click)="filtrar_tipo('TODO')">Todo</button>
+          </div>
+        </div>
+        <div ngbDropdown class="btn-group dropdown-split-primary" style="margin-right: 10px">
+          <button type="button" class="btn btn-primary light"><i class="icofont icofont-info-square"></i>Filtrar por Ubicacion</button>
+          <button ngbDropdownToggle type="button" class="btn btn-primary dropdown-toggle-split light">
+            <span class="sr-only"></span>
+          </button>
+          <div ngbDropdownMenu>
+            <div *ngFor="let ubi of ubicaciones">
+            <button class="dropdown-item ripple light" (click)="filtrar_ubicacion(ubi.id)">{{ ubi.__str__ }}</button>
+            </div>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item ripple light" (click)="filtrar_ubicacion('TODO')">Todo</button>
+          </div>
+        </div>
+        <div ngbDropdown class="btn-group dropdown-split-primary" style="margin-right: 10px">
+          <button type="button" class="btn btn-primary light"><i class="icofont icofont-info-square"></i>Filtrar por Clase</button>
+          <button ngbDropdownToggle type="button" class="btn btn-primary dropdown-toggle-split light">
+            <span class="sr-only"></span>
+          </button>
+          <div ngbDropdownMenu>
+            <div *ngFor="let clase of clases">
+            <button class="dropdown-item ripple light" (click)="filtrar_clase(clase.id)">{{ clase.nombre }}</button>
+            </div>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item ripple light" (click)="filtrar_clase('TODO')">Todo</button>
           </div>
         </div>
     </div>

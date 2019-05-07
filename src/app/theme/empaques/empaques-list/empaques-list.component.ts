@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Empaque, EmpaqueDetail } from '../../../shared/empaque/empaque';
 import { EmpaquesService } from '../../../services/empaques/empaques.service';
 import { TipoEmpaquesService } from '../../../services/tipo_empaques/tipo_empaques.service';
+import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.service';
+import { ClasesService } from '../../../services/clases/clases.service';
 
 
 @Component({
@@ -18,6 +20,8 @@ export class EmpaquesListComponent implements OnInit {
     selected = [];
     empaques = [];
     tipo_empaques = [];
+    ubicaciones = [];
+    clases = [];
 
     columns: any[] = [
         {
@@ -63,7 +67,9 @@ export class EmpaquesListComponent implements OnInit {
     ];
 
     constructor(private empaqueService: EmpaquesService,
-                private tipoEmpaqueService: TipoEmpaquesService) { }
+                private tipoEmpaqueService: TipoEmpaquesService,
+                private ubicacionesService: UbicacionesService,
+                private clasesService: ClasesService) { }
 
     ngOnInit() {
         this.empaqueService.getEmpaques().subscribe(
@@ -82,14 +88,44 @@ export class EmpaquesListComponent implements OnInit {
             err => console.log('error: ' + err.status)
         );
 
+        this.ubicacionesService.getUbicaciones().subscribe(
+            ubicaciones => this.ubicaciones = ubicaciones,
+            err => console.log('error: ' + err.status)
+        );
+
+        this.clasesService.getClases().subscribe(
+            clases => this.clases = clases,
+            err => console.log('error: ' + err.status)
+        );
+
     }
 
-    filtrar(id) {
+    filtrar_tipo(id) {
         if (id === 'TODO') {
             this.rows = this.empaques;
         } else {
             this.rows = this.empaques.filter(
                 empaque => empaque.tipo_empaque.id === id
+            );
+        }
+    }
+
+    filtrar_ubicacion(id) {
+        if (id === 'TODO') {
+            this.rows = this.empaques;
+        } else {
+            this.rows = this.empaques.filter(
+                empaque => empaque.ubicacion.id === id
+            );
+        }
+    }
+
+    filtrar_clase(id) {
+        if (id === 'TODO') {
+            this.rows = this.empaques;
+        } else {
+            this.rows = this.empaques.filter(
+                empaque => empaque.clase.id === id
             );
         }
     }
