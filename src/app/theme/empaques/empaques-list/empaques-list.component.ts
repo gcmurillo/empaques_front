@@ -69,7 +69,8 @@ export class EmpaquesListComponent implements OnInit {
     constructor(private empaqueService: EmpaquesService,
                 private tipoEmpaqueService: TipoEmpaquesService,
                 private ubicacionesService: UbicacionesService,
-                private clasesService: ClasesService) { }
+                private clasesService: ClasesService,
+                ) { }
 
     ngOnInit() {
         this.empaqueService.getEmpaques().subscribe(

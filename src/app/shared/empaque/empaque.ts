@@ -14,7 +14,7 @@ export class Empaque {
     public codigo_barras: string;
     public serie: string;
     public tipo_empaque: number;
-    public marca: string;
+    public marca: number;
     public clase: number;
     public modelo: number;
     public estado: number;

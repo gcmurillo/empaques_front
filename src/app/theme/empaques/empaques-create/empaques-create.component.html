@@ -1,3 +1,103 @@
-<p>
-  empaques-create works!
-</p>
+<div class="card">
+    <div class="card-header">
+        <h5>Crear nuevo empaque</h5>
+        <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
+    </div>
+    <div class="card-block">
+        <form class="form-material" [formGroup]="empaqueForm" (ngSubmit)=onSubmit()>
+            <div class="form-group form-default">
+                <input type="text" name="codigo" class="form-control" required formControlName="codigo">
+                <span class="form-bar"></span>
+                <label class="float-label">Codigo</label>
+            </div>
+            <div class="form-group form-default">
+                <input type="text" name="codigo_barras" class="form-control" required formControlName="codigo_barras">
+                <span class="form-bar"></span>
+                <label class="float-label">Codigo de Barras</label>
+            </div>
+            <div class="form-group form-default">
+                <input type="text" name="serie" class="form-control" required formControlName="serie">
+                <span class="form-bar"></span>
+                <label class="float-label">Serie</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Tipo de Empaque</label>
+                <div class="col-sm-3">
+                    <select name="select" class="form-control" formControlName="tipo_empaque">
+                        <option [value]="tipo.id" *ngFor="let tipo of tipo_empaques">{{ tipo.nombre }}</option>
+                    </select>
+                </div>
+                <label class="col-sm-1 col-form-label">Clase</label>
+                <div class="col-sm-3">
+                    <select name="select" class="form-control" formControlName="clase">
+                        <option [value]="clase.id" *ngFor="let clase of clases">{{ clase.nombre }}</option>
+                    </select>
+                </div>
+                <label class="col-sm-1 col-form-label">Marca</label>
+                <div class="col-sm-2">
+                    <select name="select" class="form-control" formControlName="marca">
+                        <option [value]="marca.id" *ngFor="let marca of marcas">{{ marca.nombre }}</option>
+                    </select>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary btn-outline-primary ripple"><i class="icofont icofont-plus-circle"></i> Marca</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Modelo</label>
+                <div class="col-sm-3">
+                    <select name="select" class="form-control" formControlName="modelo">
+                        <option [value]="modelo.id" *ngFor="let modelo of modelos">{{ modelo.nombre }}</option>
+                    </select>
+                </div>
+                <label class="col-sm-1 col-form-label">Estado</label>
+                <div class="col-sm-3">
+                    <select name="select" class="form-control" formControlName="estado">
+                        <option [value]="estado.id" *ngFor="let estado of estados_empaques">{{ estado.nombre }}</option>
+                    </select>
+                </div>
+                <label class="col-sm-1 col-form-label">Ubicaciones</label>
+                <div class="col-sm-3">
+                    <select name="select" class="form-control" formControlName="ubicacion">
+                        <option [value]="ubicacion.id" *ngFor="let ubicacion of ubicaciones">{{ ubicacion.__str__ }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Custodio</label>
+                <div class="col-sm-3">
+                    <select name="select" class="form-control" formControlName="custodio">
+                        <option [value]="custodio.id" *ngFor="let custodio of custodios">{{ custodio.__str__ }}</option>
+                    </select>
+                </div>
+                <!-- <label class="col-sm-1 col-form-label">Precio</label> -->
+                <div class="col-sm-4">
+                    <div class="material-group">
+                      <div class="material-addone">
+                        <span>$</span>
+                      </div>
+                      <div class="form-group form-primary">
+                        <input type="text" name="footer-email" class="form-control" required formControlName="precio">
+                        <span class="form-bar"></span>
+                        <label class="float-label">Precio</label>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="material-group">
+                      <div class="material-addone">
+                        <span>$</span>
+                      </div>
+                      <div class="form-group form-primary">
+                        <input type="text" name="footer-email" class="form-control" required formControlName="costo">
+                        <span class="form-bar"></span>
+                        <label class="float-label">Costo</label>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <button type="button" class="btn btn-primary light" (click)="guardarModal()" [disabled]="!empaqueForm.valid">Crear</button>
+        <!-- <button type="button" class="btn btn-primary light" (click)="onSubmit()" >Crear</button> -->
+    </div>
+</div>

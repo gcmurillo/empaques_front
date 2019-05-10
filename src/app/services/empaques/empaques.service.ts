@@ -24,4 +24,8 @@ export class EmpaquesService {
         return this.http.get<Empaque[]>(myGlobals.apiURL + myGlobals.EMPAQUES);
     }
 
+    public addEmpaque(empaque: Empaque): Observable<Empaque> {
+        return this.http.post<Empaque>(myGlobals.apiURL + myGlobals.CREAR_EMPAQUES, empaque);
+    }
+
 }
