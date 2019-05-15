@@ -23,4 +23,8 @@ export class MarcasService {
         return this.http.get<Marca[]>(myGlobals.apiURL + myGlobals.MARCAS);
     }
 
+    public addMarca(marca: Marca): Observable<Marca> {
+        return this.http.post<Marca>(myGlobals.apiURL + myGlobals.MARCAS, marca);
+    }
+
 }

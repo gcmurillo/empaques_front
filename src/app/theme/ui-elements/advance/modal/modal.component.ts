@@ -163,7 +163,7 @@ export class ModalComponent implements OnInit {
     });
   }
 
-  openAjaxSwal() {
+  openCrearMarca() {
     swal({
       title: 'Submit email to run ajax request',
       input: 'email',

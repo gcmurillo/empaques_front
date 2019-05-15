@@ -6,6 +6,7 @@ import swal from 'sweetalert2';
 // interfaces
 import { Empaque, EmpaqueDetail } from '../../../shared/empaque/empaque';
 import { TipoEmpaque } from '../../../shared/tipo_empaque/tipo_empaque';
+import { Marca } from '../../../shared/marca/marca';
 
 // services
 import { EmpaquesService } from '../../../services/empaques/empaques.service';
@@ -22,7 +23,7 @@ import { CustodiosService } from '../../../services/custodios/custodios.service'
     selector: 'app-empaques-create',
     templateUrl: './empaques-create.component.html',
     styleUrls: ['./empaques-create.component.scss',
-                '../../../../assets/icon/icofont/css/icofont.scss']
+        '../../../../assets/icon/icofont/css/icofont.scss']
 })
 export class EmpaquesCreateComponent implements OnInit {
 
@@ -31,11 +32,12 @@ export class EmpaquesCreateComponent implements OnInit {
     tipo_empaques = [];
     ubicaciones = [];
     clases = [];
-    marcas = [];
+    marcas: Marca[] = [];
     modelos = [];
     estados_empaques = [];
     custodios = [];
     empaque_object = new Empaque;
+    nombre_marcas: Marca[] = [];
 
     // forms elements
     empaqueForm = new FormGroup(
@@ -166,6 +168,44 @@ export class EmpaquesCreateComponent implements OnInit {
                     'error'
                 );
             }
+        });
+    }
+
+    openCrearMarca() {
+        const marca_crear = new Marca;
+        swal({
+            title: 'Crear nueva marca',
+            input: 'text',
+            showCancelButton: true,
+            confirmButtonText: 'Crear',
+            showLoaderOnConfirm: true,
+            preConfirm: (nombre_marca) => {
+                marca_crear.nombre = nombre_marca;
+                console.log(marca_crear);
+                this.marcasService.addMarca(marca_crear).subscribe(
+                    data => {
+                        swal(
+                            'Creado',
+                            'El empaque fue creado con éxito.',
+                            'success'
+                        );
+                        console.log(data);
+                        this.marcasService.getMarcas().subscribe(
+                            marcas => this.marcas = marcas,
+                            err => console.log('error: ' + err.status)
+                        );
+                    },
+                    err => {
+                        console.log('error post:');
+                        console.log(err);
+                        swal({
+                            type: 'error',
+                            title: 'Error al crear',
+                        });
+                    }
+                );
+            },
+            allowOutsideClick: () => !swal.isLoading()
         });
     }
 
