@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './layout/admin/admin.component';
 import { AuthComponent } from './layout/auth/auth.component';
 import { EmailModule } from './theme/email/email.module';
+// import { AppComponent } from 'app.component';
 
 const routes: Routes = [
     {
@@ -11,7 +12,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'users',
+                redirectTo: 'empaques',
                 pathMatch: 'full'
             },
             {
@@ -139,7 +140,15 @@ const routes: Routes = [
             {
                 path: 'empaques',
                 loadChildren: './theme/empaques/empaques.module#EmpaquesModule'
-            }
+            },
+            {
+                path: 'ordenes',
+                loadChildren: './theme/ordenes/ordenes.module#OrdenesModule'
+            },
+            {
+                path: 'transacciones',
+                loadChildren: './theme/transacciones/transacciones.module#TransaccionesModule'
+            },
         ]
     },
     {
