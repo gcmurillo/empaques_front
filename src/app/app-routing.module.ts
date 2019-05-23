@@ -59,19 +59,6 @@ const routes: Routes = [
                 path: 'user',
                 loadChildren: './theme/user/user.module#UserModule'
             },
-            // NEW
-            {
-                path: 'users',
-                loadChildren: './theme/user-crud/user-crud.module#UserCrudModule'
-            },
-            {
-                path: 'policies',
-                loadChildren: './theme/policies/policies.module#PoliciesModule'
-            },
-            {
-                path: 'farm',
-                loadChildren: './theme/farm/farm.module#FarmModule'
-            },
             {
                 path: 'email',
                 loadChildren: './theme/email/email.module#EmailModule'
@@ -111,26 +98,6 @@ const routes: Routes = [
             {
                 path: 'simple-page',
                 loadChildren: './theme/simple-page/simple-page.module#SimplePageModule'
-            },
-            {
-                path: 'inventory',
-                loadChildren: './theme/inventory/inventory.module#InventoryModule'
-            },
-            {
-                path: 'product',
-                loadChildren: './theme/product/product.module#ProductModule'
-            },
-            {
-                path: 'pool',
-                loadChildren: './theme/pool/pool.module#PoolModule'
-            },
-            {
-                path: 'sowing',
-                loadChildren: './theme/sowing/sowing.module#SowingModule'
-            },
-            {
-                path: 'cycle',
-                loadChildren: './theme/cycle/cycle.module#CycleModule'
             },
             {
                 path: 'ptransfer',
