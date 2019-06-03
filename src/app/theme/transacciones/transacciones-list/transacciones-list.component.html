@@ -1,5 +1,88 @@
 <div class="card">
     <div class="card-header">
+        <button [routerLink]="['/transacciones/transacciones-create']" type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger"> <i class="icofont icofont-plus m-r-5"></i> Nuevo
+        </button>
         <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Buscar por nombre">
+    </div>
+    <div class="card-header">
+        <div ngbDropdown class="btn-group dropdown-split-primary" style="margin-right: 10px">
+          <button type="button" class="btn btn-primary light"><i class="icofont icofont-info-square"></i>Filtrar por aprobacion</button>
+          <button ngbDropdownToggle type="button" class="btn btn-primary dropdown-toggle-split light">
+            <span class="sr-only"></span>
+          </button>
+          <div ngbDropdownMenu>
+            <button class="dropdown-item ripple light" (click)="filtrar_aprobado(false)">No Aprobado</button>
+            <button class="dropdown-item ripple light" (click)="filtrar_aprobado(true)">Aprobado</button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item ripple light" (click)="filtrar_aprobado('TODO')">Todo</button>
+          </div>
+        </div>
+        <div ngbDropdown class="btn-group dropdown-split-primary" style="margin-right: 10px">
+          <button type="button" class="btn btn-primary light"><i class="icofont icofont-info-square"></i>Filtrar por Bodega</button>
+          <button ngbDropdownToggle type="button" class="btn btn-primary dropdown-toggle-split light">
+            <span class="sr-only"></span>
+          </button>
+          <div ngbDropdownMenu>
+            <div *ngFor="let bod of bodegas">
+            <button class="dropdown-item ripple light" (click)="filtrar_bodega(bod.id)">{{ bod.nombre }}</button>
+            </div>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item ripple light" (click)="filtrar_bodega('TODO')">Todo</button>
+          </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-content crm-table">
+            <div class="project-table">
+                <div id="crm-contact" class="dt-responsive">
+                    <div class="table-responsive">
+                        <ngx-datatable
+                          class="data-table"
+                          [rows]="rows"
+                          [columnMode]="'force'"
+                          [scrollbarH]="true"
+                          [headerHeight]="50"
+                          [footerHeight]="50"
+                          [rowHeight]="'auto'"
+                          [limit]="10"
+                          [selected]="selected"
+                          (activate)="onActivate($event)"
+                          (select)='onSelect($event)'>
+                          <ngx-datatable-column name="Nombre" prop="nombre" ></ngx-datatable-column>
+                          <ngx-datatable-column name="Bodega" prop="nueva_ubicacion.bodega.nombre" ></ngx-datatable-column>
+                          <ngx-datatable-column name="Fecha Inicio" prop="fecha_inicio" ></ngx-datatable-column>
+                          <ngx-datatable-column name="Fecha Final" prop="fecha_final" ></ngx-datatable-column>
+                          <ngx-datatable-column name="Dias de Plazo" prop="dias_plazo" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  <strong>{{value}}</strong> dias
+                              </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Aprobado" prop="aprobado" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  <span *ngIf="value === false">No aprobado</span>
+                                  <span *ngIf="value === true">Aprobado</span>
+                              </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Fecha Aprobacion" prop="fecha_aprobacion" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  <span *ngIf="value">{{value}}</span>
+                                  <span *ngIf="!value">No Aprobado</span>
+                              </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Nuevo Custodio" prop="nuevo_custodio" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  {{ value.representante.nombre }} - {{ value.representante.empresa.nombre }}
+                              </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Vendedor" prop="nuevo_custodio" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  {{ value.vendedor.nombre }}
+                              </ng-template>
+                          </ngx-datatable-column>
+                        </ngx-datatable>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

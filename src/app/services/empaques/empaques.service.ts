@@ -28,4 +28,8 @@ export class EmpaquesService {
         return this.http.post<Empaque>(myGlobals.apiURL + myGlobals.CREAR_EMPAQUES, empaque);
     }
 
+    public getEmpaquebyQuery(query: string): Observable<Empaque[]> {
+        return this.http.get<Empaque[]>(myGlobals.apiURL + myGlobals.EMPAQUES + query);
+    }
+
 }

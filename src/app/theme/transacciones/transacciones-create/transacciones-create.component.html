@@ -1,0 +1,141 @@
+<div class="card">
+    <div class="card-header">
+        <h5>Crear nueva transaccion</h5>
+        <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
+    </div>
+    <div class="card-block">
+        <wizard #wizard class="arc-wizard" navBarLayout="large-empty-symbols" navBarLocation="left">
+            <wizard-step stepTitle="Datos Iniciales" navigationSymbol="1">
+                <div class="centered-content">
+                    <div>
+                        <h3>Nueva transaccion</h3>
+                        <form class="form-material" [formGroup]="transaccionForm" (ngSubmit)=onSubmit()>
+                            <div class="form-group form-default">
+                                <input type="text" name="nombre" class="form-control" required formControlName="nombre">
+                                <span class="form-bar"></span>
+                                <label class="float-label">Nombre</label>
+                            </div>
+                            <div class="form-group form-default">
+                                <input type="text" name="descripcion" class="form-control" required formControlName="descripcion">
+                                <span class="form-bar"></span>
+                                <label class="float-label">Descripcion</label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-1 col-form-label">Bodega</label>
+                                <div class="col-sm-2">
+                                    <select name="select" class="form-control" formControlName="bodega">
+                                        <option [value]="bodega.id" *ngFor="let bodega of bodegas">{{ bodega.nombre }}</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-1 col-form-label">Fecha Inicio</label>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="yyyy-mm-dd" name="fecha_inicio" formControlName="fecha_inicio" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="fecha">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" (click)="d.toggle()">
+                                                    <i class="icofont icofont-ui-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="col-sm-1 col-form-label">Nuevo Custodio</label>
+                                <div class="col-sm-2">
+                                    <select name="select" class="form-control" formControlName="nuevo_custodio">
+                                        <option [value]="custodio.id" *ngFor="let custodio of custodios">{{ custodio.__str__ }}</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-1 col-form-label">Dias Plazo</label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="dias_plazo" class="form-control" required formControlName="dias_plazo">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="btn-group mt-10">
+                        <button type="button" class="btn btn-primary btn-sm" nextStep (click)="second_page()" [disabled]="disabledSecondPage()">Siguiente</button>
+                    </div>
+                </div>
+            </wizard-step>
+            <wizard-step stepTitle="Asignar custodio" navigationSymbol="2">
+                <div class="centered-content">
+                    <div>
+                        <h3>Eleccion de Empaques</h3>
+                        <ngx-datatable
+                          class="data-table dt-chk"
+                          [rows]="empaques_get"
+                          [columnMode]="'force'"
+                          [scrollbarH]="true"
+                          [headerHeight]="50"
+                          [footerHeight]="50"
+                          [rowHeight]="'auto'"
+                          [limit]="10"
+                          [selected]="selected"
+                          [selectionType]="'checkbox'"
+                          (activate)="onActivate($event)"
+                          (select)='onSelect($event)'>
+                          <ngx-datatable-column [width]="50" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+                            <ng-template class="datatable-checkbox" ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                              <div class="checkbox-fade fade-in-default datatable-header-cell-label">
+                                <label>
+                                  <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)"/>
+                                  <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                </label>
+                              </div>
+                            </ng-template>
+                            <ng-template class="datatable-checkbox" ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                              <div class="checkbox-fade fade-in-default datatable-header-cell-label">
+                                <label>
+                                  <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)"/>
+                                  <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                </label>
+                              </div>
+                            </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Nombre" prop="__str__"></ngx-datatable-column>
+                          <ngx-datatable-column name="Tipo Empaque" prop="tipo_empaque.nombre"></ngx-datatable-column>
+                          <ngx-datatable-column name="codigo" prop="codigo"></ngx-datatable-column>
+                        </ngx-datatable>
+                        <div class="row">
+                          <div class='col-sm-12 selected-column'>
+                            <h4 class="sub-title p-t-15">Empaques seleccionados</h4>
+                            <span *ngFor='let sel of selected'>
+                                <label class="label label-primary">{{sel.__str__}}</label>
+                              </span>
+                            <span *ngIf="!selected.length">Sin selecciones</span>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="btn-group mt-10">
+                        <button type="button" class="btn btn-secondary btn-sm" previousStep>Atras</button>
+                        <button type="button" class="btn btn-primary btn-sm" nextStep [disabled]="disabledThirdPage()" (click)="third_page()">Siguiente</button>
+                    </div>
+                </div>
+            </wizard-step>
+            <wizard-step stepTitle="Resumen" navigationSymbol="3">
+                <div class="centered-content">
+                    <div>
+                        <h3>Resumen</h3>
+                        <b>Nombre: </b> {{ transaccion_object.nombre}} <br>
+                        <b>Descripcion: </b> {{ transaccion_object.descripcion }} <br>
+                        <b>Bodega: </b> {{ bodega_selected }} <br>
+                        <b>Fecha Inicio: </b> {{ transaccion_object.fecha_inicio }} <br>
+                        <b>Dias plazo: </b> {{ transaccion_object.dias_plazo }} <br>
+                    </div>
+                    <div class='col-sm-12 selected-column'>
+                        <h4 class="sub-title p-t-15">Empaques seleccionados</h4>
+                        <span *ngFor='let sel of selected'>
+                            <label class="label label-primary">{{sel.__str__}}</label>
+                          </span>
+                        <span *ngIf="!selected.length">Sin selecciones</span>
+                    </div>
+                    <div class="btn-group mt-10">
+                        <button type="button" class="btn btn-secondary btn-sm" previousStep>Atras</button>
+                        <button type="button" class="btn btn-success btn-sm" (click)="postTransaccion()">Aceptar</button>
+                    </div>
+                </div>
+            </wizard-step>
+        </wizard>
+    </div>
+</div>

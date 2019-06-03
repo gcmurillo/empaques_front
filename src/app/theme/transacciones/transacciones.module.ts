@@ -10,6 +10,7 @@ import {DataTableModule} from 'angular2-datatable';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {ArchwizardModule} from 'ng2-archwizard/dist';
 import {SharedModule} from '../../shared/shared.module';
+import { TransaccionesCreateComponent } from './transacciones-create/transacciones-create.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import {SharedModule} from '../../shared/shared.module';
     ArchwizardModule,
     SharedModule,
   ],
-  declarations: [TransaccionesListComponent]
+  declarations: [TransaccionesListComponent, TransaccionesCreateComponent]
 })
 export class TransaccionesModule { }

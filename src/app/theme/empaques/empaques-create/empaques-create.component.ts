@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { transition, trigger, style, animate } from '@angular/animations';
 import swal from 'sweetalert2';
@@ -66,6 +67,7 @@ export class EmpaquesCreateComponent implements OnInit {
         private modelosService: ModelosService,
         private estadosService: EstadosService,
         private custodioService: CustodiosService,
+        private router: Router,
     ) { }
 
     ngOnInit() {
@@ -132,6 +134,7 @@ export class EmpaquesCreateComponent implements OnInit {
                     'success'
                 );
                 console.log(data);
+                this.router.navigate(['/empaques']);
             },
             err => {
                 console.log('error post:');
@@ -141,6 +144,7 @@ export class EmpaquesCreateComponent implements OnInit {
                     'El empaque no fue creado',
                     'error'
                 );
+                this.router.navigate(['/empaques']);
             }
         );
 

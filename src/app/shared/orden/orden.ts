@@ -15,3 +15,14 @@ export class Orden {
     public nuevo_custodio: Custodio;
     public completo: boolean;
 }
+
+export class TransaccionCreate {
+    public tipo: number;
+    public nombre: string;
+    public descripcion: string;
+    public ubicacion_inicial: number;
+    public nueva_ubicacion: number;
+    public nuevo_custodio: number;
+    public fecha_inicio: string;
+    public dias_plazo: number;
+}
