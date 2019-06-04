@@ -15,6 +15,8 @@ export const EMPAQUES = 'api/empaques/';
 export const CREAR_EMPAQUES = 'api/empaques/crear/';
 export const LISTAR_TRANSACCIONES = 'api/ordenes/?tipo=1';
 export const CREAR_TRANSACCION = 'api/ordenes/crear/';
+export const LISTAR_ORDENESEMPAQUES = 'api/ordenes/empaques/';
+export const CREAR_ORDENEMPAQUES = 'api/ordenes/empaques/enlace/';
 
 export const sep = '/';
 // export const apiURL = 'http://192.168.1.10:3000/';

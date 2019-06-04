@@ -1,6 +1,7 @@
 import { TipoOrden } from '../tipo_orden/tipo_orden';
 import { Ubicacion } from '../ubicacion/ubicacion';
 import { Custodio } from '../custodio/custodio';
+import { Empaque } from '../empaque/empaque';
 
 export class Orden {
     public __str__: string;
@@ -25,4 +26,20 @@ export class TransaccionCreate {
     public nuevo_custodio: number;
     public fecha_inicio: string;
     public dias_plazo: number;
+}
+
+export class OrdenEmpaqueDetailList {
+    public id: number;
+    public __str__: string;
+    public orden: Orden;
+    public empaque: Empaque;
+    public aprobado: boolean;
+    public entregado: boolean;
+}
+
+export class OrdenEmpaqueDetailCreate {
+    public orden: number;
+    public empaque: string;
+    public aprobado: boolean;
+    public entregado: boolean;
 }

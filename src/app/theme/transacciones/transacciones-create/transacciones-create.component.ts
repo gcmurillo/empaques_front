@@ -7,7 +7,7 @@ import {NgbCalendar, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/
 
 
 import { Empaque, EmpaqueDetail } from '../../../shared/empaque/empaque';
-import { Orden, TransaccionCreate } from '../../../shared/orden/orden';
+import { Orden, TransaccionCreate, OrdenEmpaqueDetailCreate } from '../../../shared/orden/orden';
 
 import { TransaccionesService } from '../../../services/transacciones/transacciones.service';
 import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.service';
@@ -31,8 +31,11 @@ export class TransaccionesCreateComponent implements OnInit {
     custodios = [];
     ubicaciones = [];
     bodega_selected = '';
+    ordenesEmpaques = [];
+    transacciones_list = [];
 
     transaccion_object = new TransaccionCreate;
+    ordenEmpaque_object = new OrdenEmpaqueDetailCreate;
 
     transaccionForm = new FormGroup(
         {
@@ -77,6 +80,11 @@ export class TransaccionesCreateComponent implements OnInit {
 
         this.custodioService.getCustodios().subscribe(
             custodios => this.custodios = custodios,
+            err => console.log('error: ' + err.status)
+        );
+
+        this.transaccionService.getOrdenesEmpaques().subscribe(
+            ordenes => console.log(ordenes),
             err => console.log('error: ' + err.status)
         );
     }
@@ -152,6 +160,27 @@ export class TransaccionesCreateComponent implements OnInit {
                     'success'
                 );
                 console.log(data);
+                this.transacciones_list = [];
+                this.transaccionService.getTransacciones().subscribe(
+                    transacciones => {
+                        this.transacciones_list = transacciones;
+                        this.ordenEmpaque_object = new OrdenEmpaqueDetailCreate;
+                        for (const select of this.selected) {
+                            this.ordenEmpaque_object.orden = this.transacciones_list[this.transacciones_list.length - 1].id;
+                            this.ordenEmpaque_object.empaque = select.codigo;
+                            this.ordenEmpaque_object.aprobado = false;
+                            this.ordenEmpaque_object.entregado = false;
+                            this.transaccionService.createOrdenEmpaque(this.ordenEmpaque_object).subscribe(
+                                response => {
+                                    console.log(response);
+                                },
+                                err => console.log('error post:', err)
+                            );
+                        }
+                    },
+                    err => console.log('error: ' + err.status)
+                    // this.router.navigate(['/transacciones']);
+                );
                 this.router.navigate(['/transacciones']);
             },
             err => {
