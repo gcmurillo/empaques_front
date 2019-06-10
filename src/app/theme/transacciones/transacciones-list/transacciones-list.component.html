@@ -37,7 +37,8 @@
                 <div id="crm-contact" class="dt-responsive">
                     <div class="table-responsive">
                         <ngx-datatable
-                          class="data-table"
+                        #myTable
+                          class="data-table expandable"
                           [rows]="rows"
                           [columnMode]="'force'"
                           [scrollbarH]="true"
@@ -46,8 +47,43 @@
                           [rowHeight]="'auto'"
                           [limit]="10"
                           [selected]="selected"
+                          (click)="onClickRow($event)"
                           (activate)="onActivate($event)"
                           (select)='onSelect($event)'>
+                        <!-- Row Detail Template -->
+                            <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
+                                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                                <div class="dt-desc">
+                                    <table class="table-striped table-bordered">
+                                    <tr>
+                                        <th colspan="2"><strong>Empaques</strong></th>
+                                    </tr>
+                                    <tr *ngFor="let empaque of row.empaques">
+                                        <td>{{empaque.__str__}}</td>
+                                        <td>{{empaque.ubicacion.bodega.nombre}}</td>
+                                    </tr>
+                                    </table>
+                                </div>
+                    
+                                </ng-template>
+                            </ngx-datatable-row-detail>
+                          <!-- Columns properties-->
+                          <ngx-datatable-column
+                            [width]="50"
+                            [resizeable]="false"
+                            [sortable]="false"
+                            [draggable]="false"
+                            [canAutoResize]="false">
+                            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                                <a
+                                href="javascript:;"
+                                [class.datatable-icon-right]="!expanded"
+                                [class.datatable-icon-down]="expanded"
+                                title="Expand/Collapse Row"
+                                (click)="toggleExpandRow(row)">
+                                </a>
+                            </ng-template>
+                            </ngx-datatable-column>
                           <ngx-datatable-column name="Nombre" prop="nombre" ></ngx-datatable-column>
                           <ngx-datatable-column name="Bodega" prop="nueva_ubicacion.bodega.nombre" ></ngx-datatable-column>
                           <ngx-datatable-column name="Fecha Inicio" prop="fecha_inicio" ></ngx-datatable-column>

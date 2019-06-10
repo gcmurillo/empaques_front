@@ -82,11 +82,6 @@ export class TransaccionesCreateComponent implements OnInit {
             custodios => this.custodios = custodios,
             err => console.log('error: ' + err.status)
         );
-
-        this.transaccionService.getOrdenesEmpaques().subscribe(
-            ordenes => console.log(ordenes),
-            err => console.log('error: ' + err.status)
-        );
     }
 
     disabledSecondPage() {

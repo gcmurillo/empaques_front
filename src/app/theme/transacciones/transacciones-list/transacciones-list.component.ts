@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Orden } from '../../../shared/orden/orden';
 import { TransaccionesService } from '../../../services/transacciones/transacciones.service';
 import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.service';
@@ -12,10 +12,15 @@ import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.se
 })
 export class TransaccionesListComponent implements OnInit {
 
+    @ViewChild('myTable') table: any;
+
     rows = [];
     selected = [];
+    transacciones_raw = [];
     transacciones = [];
     bodegas = [];
+    ordenes_empaques = [];
+    empaques: any = {};
 
     columns: any[] = [
         {
@@ -45,13 +50,10 @@ export class TransaccionesListComponent implements OnInit {
             ) { }
 
     ngOnInit() {
+
         this.transaccionService.getTransacciones().subscribe(
-            transacciones => {
-                this.rows = transacciones;
-                this.transacciones = transacciones;
-                console.log(transacciones);
-            },
-            err => console.log('error: ' + err.status)
+                transacciones => this.rows = transacciones,    
+                err => console.log('error: ' + err.status)
         );
 
         this.ubicacionesService.getUbicaciones().subscribe(
@@ -66,6 +68,7 @@ export class TransaccionesListComponent implements OnInit {
             },
             err => console.log('error: ' + err.status)
         );
+
     }
 
     filtrar_aprobado(status) {
@@ -94,5 +97,14 @@ export class TransaccionesListComponent implements OnInit {
     }
 
     onActivate(event) {}
+
+    onClickRow(event) {}
+
+    onDetailToggle(event) {}
+
+    toggleExpandRow(row) {
+        this.table.rowDetail.toggleExpandRow(row);
+      }
+    
 
 }
