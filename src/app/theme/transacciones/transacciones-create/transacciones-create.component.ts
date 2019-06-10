@@ -112,9 +112,13 @@ export class TransaccionesCreateComponent implements OnInit {
         const dias_plazo = this.transaccionForm.value.dias_plazo;
         if (bodega !== null && fecha_inicio !== '' && dias_plazo !== '') {
             const query = '?bodega=' + bodega + '&estado=1&estado_disp=1';
-            this.empaquesService.getEmpaquebyQuery(query).subscribe(
+            /*this.empaquesService.getEmpaquebyQuery(query).subscribe(
                 empaques => this.empaques_get = empaques,
                 err => console.log('error: ' + err.status)
+            );*/
+            this.empaquesService.getEmpaquesDisponibles().subscribe(
+                empaques => this.empaques_get = empaques,
+                err => console.log(err)
             );
         } else {
             console.log('no pasa');

@@ -12,6 +12,7 @@ export const REPRESENTANTES = 'api/representantes/';
 export const VENDEDOR = 'api/vendedores/';
 export const CUSTODIOS = 'api/custodios/';
 export const EMPAQUES = 'api/empaques/';
+export const EMPAQUES_DISPONIBLES = 'api/empaques/disponibles/';
 export const CREAR_EMPAQUES = 'api/empaques/crear/';
 export const LISTAR_TRANSACCIONES = 'api/ordenes/?tipo=1';
 export const CREAR_TRANSACCION = 'api/ordenes/crear/';
