@@ -116,6 +116,10 @@ const routes: Routes = [
                 path: 'transacciones',
                 loadChildren: './theme/transacciones/transacciones.module#TransaccionesModule'
             },
+            {
+                path: 'confirmaciones',
+                loadChildren: './theme/confirmaciones/confirmaciones.module#ConfirmacionesModule'
+            }
         ]
     },
     {
