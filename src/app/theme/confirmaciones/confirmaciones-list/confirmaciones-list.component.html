@@ -1,3 +1,40 @@
-<p>
-  confirmaciones-list works!
-</p>
+<div class="card">
+  <div class="card-header">
+      <button [routerLink]="['/empaques/empaques-create']" type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMyModal('effect-13')"> <i class="icofont icofont-plus m-r-5"></i> Nuevo
+      </button>
+      <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Buscar por nombre">
+  </div>
+  <div class="card-header">
+      :)
+  </div>
+  <div class="card-body">
+      <div class="table-content crm-table">
+          <div class="project-table">
+              <div id="crm-contact" class="dt-responsive">
+                  <div class="table-responsive">
+                      <ngx-datatable
+                        class="data-table"
+                        [rows]="rows"
+                        [columnMode]="'force'"
+                        [scrollbarH]="true"
+                        [headerHeight]="50"
+                        [footerHeight]="50"
+                        [rowHeight]="'auto'"
+                        [limit]="10"
+                        (activate)="onActivate($event)">
+                        <ngx-datatable-column name="Codigo Empaque" prop="empaque.codigo" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Tipo Empaque" prop="empaque.tipo_empaque.nombre" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Nombre Orden" prop="orden.__str__" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Bodega" prop="orden.ubicacion_inicial.bodega.nombre" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Acciones">
+                          <ng-template ngx-datatable-cell-template>
+                              AULGUN BOTON
+                          </ng-template>
+                      </ngx-datatable-column>
+                      </ngx-datatable>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
