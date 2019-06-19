@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { OrdenesRoutingModule } from './ordenes-routing.module';
-import { OrdenesListComponent } from './ordenes-list/ordenes-list.component';
-
+import { CustodiosRoutingModule } from './custodios-routing.module';
+import { CustodiosCreateComponent } from './custodios-create/custodios-create.component';
+import { CustodiosListComponent } from './custodios-list/custodios-list.component';
 
 import {FormsModule, ReactiveFormsModule, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from 'ng2-validation';
@@ -12,16 +12,17 @@ import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {ArchwizardModule} from 'ng2-archwizard/dist';
 import {SharedModule} from '../../shared/shared.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
-    OrdenesRoutingModule,
+    CustodiosRoutingModule,
     NgxDatatableModule,
     FormsModule,
     ReactiveFormsModule,
     ArchwizardModule,
     SharedModule,
   ],
-  declarations: [OrdenesListComponent]
+  declarations: [CustodiosCreateComponent, CustodiosListComponent]
 })
-export class OrdenesModule { }
+export class CustodiosModule { }

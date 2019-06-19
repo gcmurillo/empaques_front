@@ -1041,14 +1041,45 @@ const EMPAQUES_MENU = [
                 icon: 'feather icon-briefcase'
             }
         ]
+    },
+    {
+        label: 'Ordenes',
+        main: [
+            {
+                state: 'custodios',
+                short_label: 'cus',
+                name: 'Custodios',
+                type: 'link',
+                icon: 'feather icon-users'
+            },
+            {
+                state: 'transacciones',
+                short_label: 'or',
+                name: 'Transacciones',
+                type: 'link',
+                icon: 'feather icon-calendar'
+            }
+        ]
+    },
+    {
+        label: 'Confirmaciones',
+        main: [
+            {
+                state: 'confirmaciones',
+                short_label: 'or',
+                name: 'Confirmaciones',
+                type: 'link',
+                icon: 'feather icon-award'
+            }
+        ]
     }
 ];
 
 @Injectable()
 export class MenuItems {
     getAll(): Menu[] {
-        return MENUITEMS;
+        // return MENUITEMS;
         // return MY_MENU;
-        // return EMPAQUES_MENU;
+        return EMPAQUES_MENU;
     }
 }

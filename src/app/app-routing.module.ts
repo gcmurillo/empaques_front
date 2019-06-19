@@ -109,8 +109,8 @@ const routes: Routes = [
                 loadChildren: './theme/empaques/empaques.module#EmpaquesModule'
             },
             {
-                path: 'ordenes',
-                loadChildren: './theme/ordenes/ordenes.module#OrdenesModule'
+                path: 'custodios',
+                loadChildren: './theme/custodios/custodios.module#CustodiosModule'
             },
             {
                 path: 'transacciones',
