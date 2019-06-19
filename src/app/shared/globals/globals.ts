@@ -20,6 +20,4 @@ export const LISTAR_ORDENESEMPAQUES = 'api/ordenes/empaques/';
 export const CREAR_ORDENEMPAQUES = 'api/ordenes/empaques/enlace/';
 
 export const sep = '/';
-// export const apiURL = 'http://192.168.1.10:3000/';
-// export const apiURL = 'http://ec2-34-216-62-59.us-west-2.compute.amazonaws.com:3000/';
 export const apiURL = 'http://localhost:8000/';

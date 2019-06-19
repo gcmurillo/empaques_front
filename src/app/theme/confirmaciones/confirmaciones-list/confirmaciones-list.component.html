@@ -4,9 +4,6 @@
       </button>
       <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Buscar por nombre">
   </div>
-  <div class="card-header">
-      :)
-  </div>
   <div class="card-body">
       <div class="table-content crm-table">
           <div class="project-table">
@@ -26,9 +23,20 @@
                         <ngx-datatable-column name="Tipo Empaque" prop="empaque.tipo_empaque.nombre" ></ngx-datatable-column>
                         <ngx-datatable-column name="Nombre Orden" prop="orden.__str__" ></ngx-datatable-column>
                         <ngx-datatable-column name="Bodega" prop="orden.ubicacion_inicial.bodega.nombre" ></ngx-datatable-column>
-                        <ngx-datatable-column name="Acciones">
-                          <ng-template ngx-datatable-cell-template>
-                              AULGUN BOTON
+                        <ngx-datatable-column name="Aprobado" prop="aprobado">
+                            <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+                                <span *ngIf="!value">NO APROBADO</span>
+                                <span *ngIf="value">APROBADO</span>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Acciones" prop="aprobado">
+                          <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+                            <button class="btn btn-success ripple light" *ngIf="!value" (click)="setAprobacion(row, true)">
+                                <i class="icofont icofont-check-circled"></i>Aprobar
+                            </button>
+                            <button class="btn btn-danger ripple light" *ngIf="value" (click)="setAprobacion(row, false)">
+                                <i class="icofont icofont-eye-alt"></i>Desaprobar
+                            </button>
                           </ng-template>
                       </ngx-datatable-column>
                       </ngx-datatable>
@@ -37,4 +45,43 @@
           </div>
       </div>
   </div>
+  <div class="card-body">
+        <div class="table-content crm-table">
+            <div class="project-table">
+                <div id="crm-contact" class="dt-responsive">
+                    <div class="table-responsive">
+                        <ngx-datatable
+                        #myTable
+                          class="data-table"
+                          [rows]="transacciones"
+                          [columnMode]="'force'"
+                          [scrollbarH]="true"
+                          [headerHeight]="50"
+                          [footerHeight]="50"
+                          [rowHeight]="'auto'"
+                          [limit]="10">
+                          <!-- Columns properties-->
+                          <ngx-datatable-column name="Nombre" prop="nombre" ></ngx-datatable-column>
+                          <ngx-datatable-column name="Aprobado" prop="aprobado" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  <span *ngIf="value === false">No aprobado</span>
+                                  <span *ngIf="value === true">Aprobado</span>
+                              </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Nuevo Custodio" prop="nuevo_custodio" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  {{ value.representante.nombre }} - {{ value.representante.empresa.nombre }}
+                              </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Vendedor" prop="nuevo_custodio" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  {{ value.vendedor.nombre }}
+                              </ng-template>
+                          </ngx-datatable-column>
+                        </ngx-datatable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

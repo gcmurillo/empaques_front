@@ -37,4 +37,11 @@ export class TransaccionesService {
         return this.http.post<OrdenEmpaqueDetailCreate>(myGlobals.apiURL + myGlobals.CREAR_ORDENEMPAQUES, orden);
     }
 
+    public editOrdenEmpaque(orden: OrdenEmpaqueDetailCreate, id): Observable<OrdenEmpaqueDetailCreate> {
+        console.log(myGlobals.apiURL + 
+            myGlobals.LISTAR_ORDENESEMPAQUES + id + '/');
+        return this.http.put<OrdenEmpaqueDetailCreate>(myGlobals.apiURL + 
+            myGlobals.LISTAR_ORDENESEMPAQUES + id + '/', orden);
+    }
+
 }

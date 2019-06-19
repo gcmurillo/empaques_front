@@ -14,24 +14,7 @@ export class ConfirmacionesListComponent implements OnInit {
   ordenes = [];
   rows = [];
 
-  columns: any[] = [
-    {
-      prop: 'orden.__str__',
-      name: 'Nombre Orden'
-    },
-    {
-      prop: 'orden.ubicacion_inicial.bodega.nombre',
-      name: 'Bodega'
-    },
-    {
-      prop: 'empaque.codigo',
-      name: 'Codigo Empaque'
-    },
-    {
-      prop: 'empaque.tipo_empaque.nombre',
-      name: 'Tipo empaque'
-    }
-  ]
+  transacciones = [];
 
   constructor(private transaccionService: TransaccionesService,
               ) { }
@@ -43,6 +26,37 @@ export class ConfirmacionesListComponent implements OnInit {
         console.log(ordenes);
       },
       err => console.log('error: ' + err.status)
+    );
+
+    this.transaccionService.getTransacciones().subscribe(
+      transacciones => this.transacciones = transacciones,    
+      err => console.log('error: ' + err.status)
+    );
+
+  }
+
+  setAprobacion(row, value) {
+    const data = {
+      "orden": row.orden.id,
+      "empaque": row.empaque.codigo,
+      "aprobado": value,
+      "entregado": row.entregado
+    }
+    this.transaccionService.editOrdenEmpaque(data, row.id).subscribe(
+      response => {
+        console.log(response)
+        this.transaccionService.getOrdenesEmpaques().subscribe(
+          ordenes => { 
+            this.rows = ordenes;
+          },
+          err => console.log('error: ' + err.status)
+        );
+        this.transaccionService.getTransacciones().subscribe(
+          transacciones => this.transacciones = transacciones,    
+          err => console.log('error: ' + err.status)
+        );
+      },
+      err => console.log(err)
     );
   }
 
