@@ -1,13 +1,11 @@
 <div class="card">
   <div class="card-header">
-      <button [routerLink]="['/empaques/empaques-create']" type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMyModal('effect-13')"> <i class="icofont icofont-plus m-r-5"></i> Nuevo
-      </button>
-      <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Buscar por nombre">
   </div>
   <div class="card-body">
       <div class="table-content crm-table">
           <div class="project-table">
               <div id="crm-contact" class="dt-responsive">
+                <span class="m-b-20">Empaques por confirmar</span><br><br>
                   <div class="table-responsive">
                       <ngx-datatable
                         class="data-table"
@@ -25,8 +23,8 @@
                         <ngx-datatable-column name="Bodega" prop="orden.ubicacion_inicial.bodega.nombre" ></ngx-datatable-column>
                         <ngx-datatable-column name="Aprobado" prop="aprobado">
                             <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-                                <span *ngIf="!value">NO APROBADO</span>
-                                <span *ngIf="value">APROBADO</span>
+                                <span *ngIf="!value"><label class="badge badge-danger">NO APROBADO</label></span>
+                                <span *ngIf="value"><label class="badge badge-success">APROBADO</label></span>
                             </ng-template>
                         </ngx-datatable-column>
                         <ngx-datatable-column name="Acciones" prop="aprobado">
@@ -49,6 +47,7 @@
         <div class="table-content crm-table">
             <div class="project-table">
                 <div id="crm-contact" class="dt-responsive">
+                    <span class="m-b-20">Ordenes</span><br><br>
                     <div class="table-responsive">
                         <ngx-datatable
                         #myTable
@@ -64,8 +63,8 @@
                           <ngx-datatable-column name="Nombre" prop="nombre" ></ngx-datatable-column>
                           <ngx-datatable-column name="Aprobado" prop="aprobado" >
                               <ng-template let-value="value" ngx-datatable-cell-template>
-                                  <span *ngIf="value === false">No aprobado</span>
-                                  <span *ngIf="value === true">Aprobado</span>
+                                  <span *ngIf="!value"><label class="badge badge-danger">NO APROBADO</label></span>
+                                  <span *ngIf="value"><label class="badge badge-success">APROBADO</label></span>
                               </ng-template>
                           </ngx-datatable-column>
                           <ngx-datatable-column name="Nuevo Custodio" prop="nuevo_custodio" >
