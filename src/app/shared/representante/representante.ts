@@ -10,6 +10,15 @@ export class Representante {
     public empresa: string;
 }
 
+export class RepresentanteCreate {
+    public cedula: string;
+    public nombre: string;
+    public nombre_carta: string;
+    public telefono: string;
+    public empresa: string;
+    public correos: string[];
+}
+
 
 export class RepresentanteDetail {
     public id: number;

@@ -15,3 +15,8 @@ export class CustodioDetail {
     public representante: RepresentanteDetail;
     public vendedor: Vendedor;
 }
+
+export class CustodioCreate {
+    public representante: number;
+    public vendedor: number;
+}

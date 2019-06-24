@@ -4,3 +4,8 @@ export class Vendedor {
     public nombre: string;
     public cedula: string;
 }
+
+export class VendedorCreate {
+    public nombre: string;
+    public cedula: string;
+}
