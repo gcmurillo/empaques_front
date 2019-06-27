@@ -3,12 +3,22 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup , Validators} from '@angular/forms';
 import { transition, trigger, style, animate } from '@angular/animations';
 import swal from 'sweetalert2';
+import {IOption} from 'ng-select'
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/first';
+
 
 // interfaces
 import { Empresa, EmpresaCreate } from '../../../shared/empresa/empresa';
 import { RepresentanteCreate } from '../../../shared/representante/representante';
 import { VendedorCreate } from '../../../shared/vendedor/vendedor';
-import { CustodioCreate } from '../../../shared/custodio/custodio';
+import { CustodioCreate, Correo } from '../../../shared/custodio/custodio';
 
 // services
 import { CustodiosService } from '../../../services/custodios/custodios.service';
@@ -26,6 +36,8 @@ export class CustodiosCreateComponent implements OnInit {
     vendedores = [];
     empresas = []
     err_empresa = [];
+    correos = [];
+    correos_selected: Array<Correo> = [];
 
     // forms elements
     custodioForm = new FormGroup(
@@ -42,7 +54,6 @@ export class CustodiosCreateComponent implements OnInit {
             nombre_carta: new FormControl(''),
             telefono: new FormControl('', [Validators.minLength(6), Validators.pattern('[\\d]+')]),
             empresa: new FormControl('', Validators.required),
-            correo: new FormControl('', [Validators.required, Validators.email]),
         }
     );
 
@@ -74,6 +85,11 @@ export class CustodiosCreateComponent implements OnInit {
 
         this.custodioService.getEmpresas().subscribe(
             empresas => this.empresas = empresas,
+            err => console.log(err)
+        );
+
+        this.custodioService.getCorreos().subscribe(
+            correos => this.correos = correos,
             err => console.log(err)
         );
 
@@ -143,8 +159,11 @@ export class CustodiosCreateComponent implements OnInit {
         repre_obj.nombre_carta = this.repreForm.value.nombre_carta;
         repre_obj.telefono = this.repreForm.value.telefono;
         repre_obj.empresa = this.repreForm.value.empresa;
-        repre_obj.correos = [this.repreForm.value.correo]
-        console.log(repre_obj);
+        const corr_ids = [];
+        for (let corr of this.correos_selected) {
+            corr_ids.push(corr.id);
+        }
+        repre_obj.correos = corr_ids;
 
         this.custodioService.addRepre(repre_obj).subscribe(
             data => {
@@ -358,5 +377,55 @@ export class CustodiosCreateComponent implements OnInit {
         });
         
     }
+
+    addCorreo(correo_obj){
+        if (!this.correos_selected.filter(correo => correo.id === correo_obj.id)[0]) {
+            this.correos_selected.push(correo_obj);
+        }
+    }
+
+    deleteCorreo(correo_obj) {
+        this.correos_selected.splice(this.correos_selected.findIndex(e => e.id === correo_obj.id), 1)
+    }
+
+    openCrearCorreo() {
+        const correo_crear = {
+            correo: ''
+        };
+        swal({
+            title: 'Crear nuevo correo',
+            input: 'email',
+            showCancelButton: true,
+            confirmButtonText: 'Crear',
+            showLoaderOnConfirm: true,
+            preConfirm: (correo) => {
+                correo_crear.correo = correo;
+                this.custodioService.addCorreo(correo_crear).subscribe(
+                    data => {
+                        swal(
+                            'Creado',
+                            'El correo fue creado con éxito.',
+                            'success'
+                        );
+                        console.log(data);
+                        this.custodioService.getCorreos().subscribe(
+                            correos => this.correos = correos,
+                            err => console.log('error: ' + err.status)
+                        );
+                    },
+                    err => {
+                        console.log('error post:');
+                        console.log(err);
+                        swal({
+                            type: 'error',
+                            title: 'Error al crear',
+                        });
+                    }
+                );
+            },
+            allowOutsideClick: () => !swal.isLoading()
+        });
+    }
+
 
 }

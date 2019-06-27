@@ -11,7 +11,9 @@ import {DataTableModule} from 'angular2-datatable';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {ArchwizardModule} from 'ng2-archwizard/dist';
 import {SharedModule} from '../../shared/shared.module';
-
+import {SelectModule} from 'ng-select';
+import {TagInputModule} from 'ngx-chips';
+// import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -22,6 +24,9 @@ import {SharedModule} from '../../shared/shared.module';
     ReactiveFormsModule,
     ArchwizardModule,
     SharedModule,
+    SelectModule,
+    TagInputModule,
+    // NgSelectModule,
   ],
   declarations: [CustodiosCreateComponent, CustodiosListComponent]
 })

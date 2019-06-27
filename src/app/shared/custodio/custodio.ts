@@ -20,3 +20,12 @@ export class CustodioCreate {
     public representante: number;
     public vendedor: number;
 }
+
+export class Correo {
+    public id: number;
+    public correo: string;
+}
+
+export class CorreoCrear {
+    public correo: string;
+}

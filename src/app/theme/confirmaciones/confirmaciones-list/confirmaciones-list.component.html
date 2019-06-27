@@ -67,6 +67,12 @@
                                   <span *ngIf="value"><label class="badge badge-success">APROBADO</label></span>
                               </ng-template>
                           </ngx-datatable-column>
+                          <ngx-datatable-column name="Despachado" prop="despachado" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  <span *ngIf="!value"><label class="badge badge-danger">NO DESPACHADO</label></span>
+                                  <span *ngIf="value"><label class="badge badge-success">DESPACHADO</label></span>
+                              </ng-template>
+                          </ngx-datatable-column>
                           <ngx-datatable-column name="Nuevo Custodio" prop="nuevo_custodio" >
                               <ng-template let-value="value" ngx-datatable-cell-template>
                                   {{ value.representante.nombre }} - {{ value.representante.empresa.nombre }}
@@ -77,6 +83,13 @@
                                   {{ value.vendedor.nombre }}
                               </ng-template>
                           </ngx-datatable-column>
+                          <ngx-datatable-column name="Acciones" prop="aprobado">
+                            <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+                              <button class="btn btn-success ripple light" *ngIf="!value" (click)="setAprobacion(row, true)">
+                                  <i class="icofont icofont-check-circled"></i>Despachar
+                              </button>
+                            </ng-template>
+                        </ngx-datatable-column>
                         </ngx-datatable>
                     </div>
                 </div>

@@ -19,6 +19,7 @@ export const LISTAR_TRANSACCIONES = 'api/ordenes/?tipo=1';
 export const CREAR_TRANSACCION = 'api/ordenes/crear/';
 export const LISTAR_ORDENESEMPAQUES = 'api/ordenes/empaques/';
 export const CREAR_ORDENEMPAQUES = 'api/ordenes/empaques/enlace/';
+export const CORREOS = 'api/correos/';
 
 export const sep = '/';
 export const apiURL = 'http://localhost:8000/';

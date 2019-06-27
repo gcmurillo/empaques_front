@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Custodio, CustodioCreate } from '../../shared/custodio/custodio';
+import { Custodio, CustodioCreate, Correo, CorreoCrear } from '../../shared/custodio/custodio';
 import { RepresentanteDetail, RepresentanteCreate } from '../../shared/representante/representante';
 import { Vendedor, VendedorCreate } from '../../shared/vendedor/vendedor';
 import { Empresa } from '../../shared/empresa/empresa';
@@ -53,4 +53,14 @@ export class CustodiosService {
     public addCustodio(custodio: CustodioCreate): Observable<CustodioCreate> {
         return this.http.post<CustodioCreate>(myGlobals.apiURL + myGlobals.CREAR_CUSTODIOS, custodio);
     }
+
+    public getCorreos(): Observable<Correo[]>{
+        return this.http.get<Correo[]>(myGlobals.apiURL + myGlobals.CORREOS);
+    }
+
+    public addCorreo(correo: CorreoCrear): Observable<Correo> {
+        console.log(correo);
+        return this.http.post<Correo>(myGlobals.apiURL + myGlobals.CORREOS, correo);
+    }
+
 }
