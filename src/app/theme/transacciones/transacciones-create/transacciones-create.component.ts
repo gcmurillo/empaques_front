@@ -117,7 +117,9 @@ export class TransaccionesCreateComponent implements OnInit {
                 err => console.log('error: ' + err.status)
             );*/
             this.empaquesService.getEmpaquesDisponibles().subscribe(
-                empaques => this.empaques_get = empaques,
+                empaques => {
+                    this.empaques_get = empaques;
+                },
                 err => console.log(err)
             );
         } else {

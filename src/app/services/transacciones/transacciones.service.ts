@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Orden, TransaccionCreate, OrdenEmpaqueDetailList, OrdenEmpaqueDetailCreate } from '../../shared/orden/orden';
+import { Orden, TransaccionCreate, OrdenEmpaqueDetailList, OrdenEmpaqueDetailCreate,
+        OrdenDespachar } from '../../shared/orden/orden';
 
 import * as myGlobals from '../../shared/globals/globals';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -38,10 +39,12 @@ export class TransaccionesService {
     }
 
     public editOrdenEmpaque(orden: OrdenEmpaqueDetailCreate, id): Observable<OrdenEmpaqueDetailCreate> {
-        console.log(myGlobals.apiURL + 
-            myGlobals.LISTAR_ORDENESEMPAQUES + id + '/');
         return this.http.put<OrdenEmpaqueDetailCreate>(myGlobals.apiURL + 
             myGlobals.LISTAR_ORDENESEMPAQUES + id + '/', orden);
+    }
+
+    public despacharOrden(orden: OrdenDespachar, id): Observable<OrdenDespachar> {
+        return this.http.put<OrdenDespachar>(myGlobals.apiURL + myGlobals.DESPACHAR_ORDENES + id + '/', orden);
     }
 
 }

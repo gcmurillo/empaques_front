@@ -83,9 +83,9 @@
                                   {{ value.vendedor.nombre }}
                               </ng-template>
                           </ngx-datatable-column>
-                          <ngx-datatable-column name="Acciones" prop="aprobado">
+                          <ngx-datatable-column name="Acciones" prop="despachado">
                             <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-                              <button class="btn btn-success ripple light" *ngIf="!value" (click)="setAprobacion(row, true)">
+                              <button class="btn btn-success ripple light" *ngIf="!value" (click)="setDespachado(row, true)">
                                   <i class="icofont icofont-check-circled"></i>Despachar
                               </button>
                             </ng-template>

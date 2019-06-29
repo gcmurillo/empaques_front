@@ -15,6 +15,7 @@ export class Orden {
     public nueva_ubicacion: Ubicacion;
     public nuevo_custodio: Custodio;
     public completo: boolean;
+    public despachado: boolean;
 }
 
 export class TransaccionCreate {
@@ -42,4 +43,10 @@ export class OrdenEmpaqueDetailCreate {
     public empaque: string;
     public aprobado: boolean;
     public entregado: boolean;
+}
+
+export class OrdenDespachar {
+    public tipo: number;
+    public despachado: boolean;
+    public ubicacion_inicial: number;
 }
