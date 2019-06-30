@@ -17,6 +17,16 @@ export class ConfirmacionesListComponent implements OnInit {
 
   transacciones = [];
 
+  empaques_messages = {
+    emptyMessage: "Sin empaques que aprobar",
+    totalMessage: " Empaques"
+  }
+
+  ordenes_messages = {
+    emptyMessage: "Sin ordenes que despachar",
+    totalMessage: " Ordenes"
+  }
+
   constructor(private transaccionService: TransaccionesService,
               ) { }
 

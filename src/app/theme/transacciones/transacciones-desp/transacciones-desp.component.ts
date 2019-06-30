@@ -4,13 +4,13 @@ import { TransaccionesService } from '../../../services/transacciones/transaccio
 import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.service';
 
 @Component({
-    selector: 'app-transacciones-list',
-    templateUrl: './transacciones-list.component.html',
-    styleUrls: ['./transacciones-list.component.scss',
+    selector: 'app-transacciones-desp',
+    templateUrl: './transacciones-desp.component.html',
+    styleUrls: [
         '../../../../assets/icon/icofont/css/icofont.scss'
     ]
 })
-export class TransaccionesListComponent implements OnInit {
+export class TransaccionesDespComponent implements OnInit {
 
     @ViewChild('myTable') table: any;
 
@@ -51,7 +51,7 @@ export class TransaccionesListComponent implements OnInit {
 
     ngOnInit() {
 
-        this.transaccionService.getTransaccionesNoDespachadas().subscribe(
+        this.transaccionService.getTransaccionesDespachadas().subscribe(
                 transacciones => {
                     this.rows = transacciones;
                     this.transacciones = transacciones;

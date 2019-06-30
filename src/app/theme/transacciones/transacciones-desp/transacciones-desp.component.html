@@ -93,16 +93,10 @@
                                   <strong>{{value}}</strong> dias
                               </ng-template>
                           </ngx-datatable-column>
-                          <ngx-datatable-column name="Aprobado" prop="aprobado" >
+                          <ngx-datatable-column name="Retornado" prop="completo" >
                               <ng-template let-value="value" ngx-datatable-cell-template>
-                                  <span *ngIf="!value"><label class="badge badge-danger">NO APROBADO</label></span>
-                                  <span *ngIf="value"><label class="badge badge-success">APROBADO</label></span>
-                              </ng-template>
-                          </ngx-datatable-column>
-                          <ngx-datatable-column name="Fecha Aprobacion" prop="fecha_aprobacion" >
-                              <ng-template let-value="value" ngx-datatable-cell-template>
-                                  <span *ngIf="value">{{value}}</span>
-                                  <span *ngIf="!value">No Aprobado</span>
+                                  <span *ngIf="!value"><label class="badge badge-danger">NO RETORNADO</label></span>
+                                  <span *ngIf="value"><label class="badge badge-success">RETORNADO</label></span>
                               </ng-template>
                           </ngx-datatable-column>
                           <ngx-datatable-column name="Nuevo Custodio" prop="nuevo_custodio" >

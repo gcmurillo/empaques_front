@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ConfirmacionesRoutingModule } from './confirmaciones-routing.module';
+import { OperacionesRoutingModule } from './operaciones-routing.module';
 import { ConfirmacionesListComponent } from './confirmaciones-list/confirmaciones-list.component';
+import { RetornosListComponent } from './retornos-list/retornos-list.component';
 
 import {FormsModule, ReactiveFormsModule, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from 'ng2-validation';
@@ -15,13 +16,13 @@ import {SharedModule} from '../../shared/shared.module';
 @NgModule({
   imports: [
     CommonModule,
-    ConfirmacionesRoutingModule,
+    OperacionesRoutingModule,
     NgxDatatableModule,
     FormsModule,
     ReactiveFormsModule,
     ArchwizardModule,
     SharedModule,
   ],
-  declarations: [ConfirmacionesListComponent]
+  declarations: [ConfirmacionesListComponent, RetornosListComponent]
 })
-export class ConfirmacionesModule { }
+export class OperacionesModule { }

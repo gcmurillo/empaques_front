@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TransaccionesRoutingModule } from './transacciones-routing.module';
 import { TransaccionesListComponent } from './transacciones-list/transacciones-list.component';
+import { TransaccionesDespComponent } from './transacciones-desp/transacciones-desp.component';
 
 import {FormsModule, ReactiveFormsModule, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from 'ng2-validation';
@@ -22,6 +23,6 @@ import { TransaccionesCreateComponent } from './transacciones-create/transaccion
     ArchwizardModule,
     SharedModule,
   ],
-  declarations: [TransaccionesListComponent, TransaccionesCreateComponent]
+  declarations: [TransaccionesListComponent, TransaccionesCreateComponent, TransaccionesDespComponent]
 })
 export class TransaccionesModule { }

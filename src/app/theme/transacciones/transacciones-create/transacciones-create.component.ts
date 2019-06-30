@@ -182,7 +182,7 @@ export class TransaccionesCreateComponent implements OnInit {
                     err => console.log('error: ' + err.status)
                     // this.router.navigate(['/transacciones']);
                 );
-                this.router.navigate(['/transacciones']);
+                this.router.navigate(['/transacciones/no-desp']);
             },
             err => {
                 console.log('error post:');
@@ -192,7 +192,7 @@ export class TransaccionesCreateComponent implements OnInit {
                     'La transaccion no fue creado' + err.status,
                     'error'
                 );
-                this.router.navigate(['/transacciones/transacciones-create']);
+                this.router.navigate(['/transacciones/create']);
             }
         );
     }

@@ -1056,20 +1056,44 @@ const EMPAQUES_MENU = [
                 state: 'transacciones',
                 short_label: 'or',
                 name: 'Transacciones',
-                type: 'link',
-                icon: 'feather icon-calendar'
+                type: 'sub',
+                icon: 'feather icon-calendar',
+                children: [
+                    {
+                        state: 'create',
+                        name: 'Crear Transaccion',
+                    },
+                    {
+                        state: 'no-desp',
+                        name: 'No Despachadas',
+                    },
+                    {
+                        state: 'desp',
+                        name: 'Despachadas',
+                    },
+                ]
             }
         ]
     },
     {
-        label: 'Confirmaciones',
+        label: 'Operaciones',
         main: [
             {
-                state: 'confirmaciones',
+                state: 'operaciones',
                 short_label: 'or',
                 name: 'Confirmaciones',
-                type: 'link',
-                icon: 'feather icon-award'
+                type: 'sub',
+                icon: 'feather icon-award',
+                children: [
+                    {
+                        state: 'confirmaciones',
+                        name: 'Aprobar Empaques y Despachos'
+                    },
+                    {
+                        state: 'retornos',
+                        name: 'Retorno de Empaques'
+                    }
+                ]
             }
         ]
     }

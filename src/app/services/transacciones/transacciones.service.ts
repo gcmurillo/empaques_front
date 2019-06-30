@@ -26,6 +26,10 @@ export class TransaccionesService {
         return this.http.get<Orden[]>(myGlobals.apiURL + myGlobals.LISTAR_TRANSACCIONES_NO_DESPACHADAS);
     }
     
+    public getTransaccionesDespachadas(): Observable<Orden[]> {
+        return this.http.get<Orden[]>(myGlobals.apiURL + myGlobals.LISTAR_TRANSACCIONES_DESPACHADAS);
+    }
+    
     public getTransaccionesTODAS(): Observable<Orden[]> {
         return this.http.get<Orden[]>(myGlobals.apiURL + myGlobals.LISTAR_TRANSACCIONES_TODAS);
     }
@@ -49,6 +53,10 @@ export class TransaccionesService {
 
     public despacharOrden(orden: OrdenDespachar, id): Observable<OrdenDespachar> {
         return this.http.put<OrdenDespachar>(myGlobals.apiURL + myGlobals.DESPACHAR_ORDENES + id + '/', orden);
+    }
+
+    public getOrdenesEmpaquesPorEntregar(): Observable<OrdenEmpaqueDetailList[]> {
+        return this.http.get<OrdenEmpaqueDetailList[]>(myGlobals.apiURL + myGlobals.ENTREGAR_ORDENESEMPAQUES);
     }
 
 }

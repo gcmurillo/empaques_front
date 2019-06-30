@@ -22,8 +22,8 @@
           <a class="mobile-menu ripple light" id="mobile-collapse" href="javascript:" (click)="toggleOpened($event)" [exclude]="'#main_navbar'" (clickOutside)="onClickedOutsideSidebar($event)">
             <i class="feather" [ngClass]="toggleIcon"></i>
           </a>
-          <a [routerLink]="['/dashboard/default/']" class="ripple light">
-            <img class="img-fluid" src="assets/images/logo.png" alt="Able Pro 7" />
+          <a class="ripple light">
+            <img class="img-fluid" src="assets/images/logo_empaques_blanco.png" alt="Logo" />
           </a>
           <a href="javascript:" class="mobile-options ripple light" (click)="toggleHeaderNavRight()">
             <i class="feather icon-more-horizontal"></i>
@@ -34,7 +34,7 @@
             <li class="ripple light">
               <div class="sidebar_toggle"><a href="javascript:"><i class="icon-menu"></i></a></div>
             </li>
-            <li class="header-search">
+            <!--<li class="header-search">
               <div id="main-search" class="main-search morphsearch-search">
                 <div class="input-group">
                   <span class="input-group-prepend search-close" (click)="searchOff()"><i class="feather icon-x input-group-text"></i></span>
@@ -42,7 +42,7 @@
                   <span class="input-group-append search-btn" (click)="searchOn()"><i class="feather icon-search input-group-text"></i></span>
                 </div>
               </div>
-            </li>
+            </li>-->
             <li class="ripple light" appToggleFullScreen>
               <a href="javascript:">
                 <i class="feather icon-maximize full-screen"></i>
@@ -52,7 +52,7 @@
 
           <ul [@mobileHeaderNavRight]="navRight" [ngClass]="navRight" class="nav-right">
               <!-- Notificacionts and Messages icons menu bar -->
-
+            <!--
             <li (clickOutside)="notificationOutsideClick('live')" class="header-notification ripple light" (click)="toggleLiveNotification()">
               <a href="javascript:">
                 <i class="feather icon-bell"></i>
@@ -94,7 +94,7 @@
                   </div>
                 </li>
               </ul>
-            </li>
+            </li>-->
             <!-- <li class="ripple light">
               <a href="javascript:" (click)="toggleChat()">
                 <i class="feather icon-message-square"></i>

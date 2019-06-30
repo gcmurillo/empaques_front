@@ -16,7 +16,8 @@
                         [footerHeight]="50"
                         [rowHeight]="'auto'"
                         [limit]="10"
-                        (activate)="onActivate($event)">
+                        [messages]="empaques_messages"
+                        >
                         <ngx-datatable-column name="Codigo Empaque" prop="empaque.codigo" ></ngx-datatable-column>
                         <ngx-datatable-column name="Tipo Empaque" prop="empaque.tipo_empaque.nombre" ></ngx-datatable-column>
                         <ngx-datatable-column name="Nombre Orden" prop="orden.__str__" ></ngx-datatable-column>
@@ -58,7 +59,8 @@
                           [headerHeight]="50"
                           [footerHeight]="50"
                           [rowHeight]="'auto'"
-                          [limit]="10">
+                          [limit]="10"
+                          [messages]="ordenes_messages">
                           <!-- Columns properties-->
                           <ngx-datatable-column name="Nombre" prop="nombre" ></ngx-datatable-column>
                           <ngx-datatable-column name="Aprobado" prop="aprobado" >

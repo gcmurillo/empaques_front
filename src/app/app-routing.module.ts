@@ -117,8 +117,8 @@ const routes: Routes = [
                 loadChildren: './theme/transacciones/transacciones.module#TransaccionesModule'
             },
             {
-                path: 'confirmaciones',
-                loadChildren: './theme/confirmaciones/confirmaciones.module#ConfirmacionesModule'
+                path: 'operaciones',
+                loadChildren: './theme/operaciones/operaciones.module#OperacionesModule'
             }
         ]
     },

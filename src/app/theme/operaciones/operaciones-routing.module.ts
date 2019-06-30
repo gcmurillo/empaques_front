@@ -2,13 +2,22 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ConfirmacionesListComponent } from './confirmaciones-list/confirmaciones-list.component';
+import { RetornosListComponent } from './retornos-list/retornos-list.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'confirmaciones',
     component: ConfirmacionesListComponent,
     data: {
       title: 'Confirmar Empaques',
+      status: true
+    } 
+  },
+  {
+    path: 'retornos',
+    component: RetornosListComponent,
+    data: {
+      title: 'Retornos Empaques',
       status: true
     } 
   }
@@ -18,4 +27,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ConfirmacionesRoutingModule { }
+export class OperacionesRoutingModule { }

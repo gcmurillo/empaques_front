@@ -21,6 +21,7 @@ export const LISTAR_TRANSACCIONES_DESPACHADAS = 'api/ordenes/?tipo=1&despachado=
 export const CREAR_TRANSACCION = 'api/ordenes/crear/';
 export const LISTAR_ORDENESEMPAQUES = 'api/ordenes/empaques/';
 export const CREAR_ORDENEMPAQUES = 'api/ordenes/empaques/enlace/';
+export const ENTREGAR_ORDENESEMPAQUES = 'api/ordenes/empaques/por_entregar/';
 export const CORREOS = 'api/correos/';
 export const DESPACHAR_ORDENES = 'api/ordenes/despachar/';
 
