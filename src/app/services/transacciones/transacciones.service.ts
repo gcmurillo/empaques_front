@@ -22,8 +22,12 @@ export class TransaccionesService {
 
     constructor(private http: HttpClient) { }
 
-    public getTransacciones(): Observable<Orden[]> {
-        return this.http.get<Orden[]>(myGlobals.apiURL + myGlobals.LISTAR_TRANSACCIONES);
+    public getTransaccionesNoDespachadas(): Observable<Orden[]> {
+        return this.http.get<Orden[]>(myGlobals.apiURL + myGlobals.LISTAR_TRANSACCIONES_NO_DESPACHADAS);
+    }
+    
+    public getTransaccionesTODAS(): Observable<Orden[]> {
+        return this.http.get<Orden[]>(myGlobals.apiURL + myGlobals.LISTAR_TRANSACCIONES_TODAS);
     }
 
     public createTransaccion(transaccion: TransaccionCreate): Observable<TransaccionCreate> {

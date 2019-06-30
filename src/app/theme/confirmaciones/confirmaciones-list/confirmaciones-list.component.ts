@@ -29,7 +29,7 @@ export class ConfirmacionesListComponent implements OnInit {
       err => console.log('error: ' + err.status)
     );
 
-    this.transaccionService.getTransacciones().subscribe(
+    this.transaccionService.getTransaccionesNoDespachadas().subscribe(
       transacciones => this.transacciones = transacciones,    
       err => console.log('error: ' + err.status)
     );
@@ -52,7 +52,7 @@ export class ConfirmacionesListComponent implements OnInit {
           },
           err => console.log('error: ' + err.status)
         );
-        this.transaccionService.getTransacciones().subscribe(
+        this.transaccionService.getTransaccionesNoDespachadas().subscribe(
           transacciones => this.transacciones = transacciones,    
           err => console.log('error: ' + err.status)
         );
@@ -80,7 +80,7 @@ export class ConfirmacionesListComponent implements OnInit {
           },
           err => console.log('error: ' + err.status)
         );
-        this.transaccionService.getTransacciones().subscribe(
+        this.transaccionService.getTransaccionesNoDespachadas().subscribe(
           transacciones => this.transacciones = transacciones,    
           err => console.log('error: ' + err.status)
         );

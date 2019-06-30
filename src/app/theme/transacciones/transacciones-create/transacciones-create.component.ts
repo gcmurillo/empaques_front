@@ -162,7 +162,7 @@ export class TransaccionesCreateComponent implements OnInit {
                 );
                 console.log(data);
                 this.transacciones_list = [];
-                this.transaccionService.getTransacciones().subscribe(
+                this.transaccionService.getTransaccionesTODAS().subscribe(
                     transacciones => {
                         this.transacciones_list = transacciones;
                         this.ordenEmpaque_object = new OrdenEmpaqueDetailCreate;

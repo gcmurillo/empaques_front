@@ -51,8 +51,11 @@ export class TransaccionesListComponent implements OnInit {
 
     ngOnInit() {
 
-        this.transaccionService.getTransacciones().subscribe(
-                transacciones => this.rows = transacciones,    
+        this.transaccionService.getTransaccionesTODAS().subscribe(
+                transacciones => {
+                    this.rows = transacciones;
+                    this.transacciones = transacciones;
+                },    
                 err => console.log('error: ' + err.status)
         );
 
