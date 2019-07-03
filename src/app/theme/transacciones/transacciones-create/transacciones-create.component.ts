@@ -14,6 +14,7 @@ import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.se
 import { CustodiosService } from '../../../services/custodios/custodios.service';
 import { EstadosService } from '../../../services/estados/estados.service';
 import { EmpaquesService } from '../../../services/empaques/empaques.service';
+import { LoginService } from '../../../services/login/login.service';
 
 @Component({
     selector: 'app-transacciones-create',
@@ -56,6 +57,7 @@ export class TransaccionesCreateComponent implements OnInit {
         public custodioService: CustodiosService,
         public transaccionService: TransaccionesService,
         private router: Router,
+        private loginService: LoginService,
     ) { }
 
     ngOnInit() {
@@ -82,6 +84,8 @@ export class TransaccionesCreateComponent implements OnInit {
             custodios => this.custodios = custodios,
             err => console.log('error: ' + err.status)
         );
+
+        this.loginService.isLoged('CO');
     }
 
     disabledSecondPage() {

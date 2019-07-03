@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ConfirmacionesListComponent } from './confirmaciones-list/confirmaciones-list.component';
 import { RetornosListComponent } from './retornos-list/retornos-list.component';
+import { LlenadoListComponent } from './llenado-list/llenado-list.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,14 @@ const routes: Routes = [
   {
     path: 'retornos',
     component: RetornosListComponent,
+    data: {
+      title: 'Retornos Empaques',
+      status: true
+    } 
+  },
+  {
+    path: 'llenado',
+    component: LlenadoListComponent,
     data: {
       title: 'Retornos Empaques',
       status: true

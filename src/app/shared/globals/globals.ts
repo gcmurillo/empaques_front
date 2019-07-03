@@ -14,6 +14,8 @@ export const CUSTODIOS = 'api/custodios/';
 export const CREAR_CUSTODIOS = 'api/custodios/crear/';
 export const EMPAQUES = 'api/empaques/';
 export const EMPAQUES_DISPONIBLES = 'api/empaques/disponibles/';
+export const EMPAQUES_VACIOS = 'api/empaques/?estado_disp=2';
+export const LLENAR_EMPAQUE = 'api/empaques/llenar/';
 export const CREAR_EMPAQUES = 'api/empaques/crear/';
 export const LISTAR_TRANSACCIONES_NO_DESPACHADAS = 'api/ordenes/?tipo=1&despachado=False';
 export const LISTAR_TRANSACCIONES_TODAS = 'api/ordenes/?tipo=1';
@@ -24,6 +26,7 @@ export const CREAR_ORDENEMPAQUES = 'api/ordenes/empaques/enlace/';
 export const ENTREGAR_ORDENESEMPAQUES = 'api/ordenes/empaques/por_entregar/';
 export const CORREOS = 'api/correos/';
 export const DESPACHAR_ORDENES = 'api/ordenes/despachar/';
+export const LOGIN = 'api/login/';
 
 export const sep = '/';
 export const apiURL = 'http://localhost:8000/';

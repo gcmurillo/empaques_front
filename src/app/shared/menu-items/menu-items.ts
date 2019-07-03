@@ -1092,6 +1092,10 @@ const EMPAQUES_MENU = [
                     {
                         state: 'retornos',
                         name: 'Retorno de Empaques'
+                    },
+                    {
+                        state: 'llenado',
+                        name: 'Cambiar a Lleno'
                     }
                 ]
             }
@@ -1099,11 +1103,96 @@ const EMPAQUES_MENU = [
     }
 ];
 
+const OP_MENU = [
+    {
+        label: 'Empaques',
+        main: [
+            {
+                state: 'empaques',
+                short_label: 'em',
+                name: 'Empaques',
+                type: 'link',
+                icon: 'feather icon-briefcase'
+            }
+        ]
+    },
+    {
+        label: 'Operaciones',
+        main: [
+            {
+                state: 'operaciones',
+                short_label: 'or',
+                name: 'Confirmaciones',
+                type: 'sub',
+                icon: 'feather icon-award',
+                children: [
+                    {
+                        state: 'confirmaciones',
+                        name: 'Aprobar Empaques y Despachos'
+                    },
+                    {
+                        state: 'retornos',
+                        name: 'Retorno de Empaques'
+                    },
+                    {
+                        state: 'llenado',
+                        name: 'Cambiar a Lleno'
+                    }
+                ]
+            }
+        ]
+    }
+];
+
+const CO_MENU = [
+    {
+        label: 'Ordenes',
+        main: [
+            {
+                state: 'custodios',
+                short_label: 'cus',
+                name: 'Custodios',
+                type: 'link',
+                icon: 'feather icon-users'
+            },
+            {
+                state: 'transacciones',
+                short_label: 'or',
+                name: 'Transacciones',
+                type: 'sub',
+                icon: 'feather icon-calendar',
+                children: [
+                    {
+                        state: 'create',
+                        name: 'Crear Transaccion',
+                    },
+                    {
+                        state: 'no-desp',
+                        name: 'No Despachadas',
+                    },
+                    {
+                        state: 'desp',
+                        name: 'Despachadas',
+                    },
+                ]
+            }
+        ]
+    },
+];
+
 @Injectable()
 export class MenuItems {
     getAll(): Menu[] {
         // return MENUITEMS;
+        if (localStorage.getItem('tipo') === 'OP') {
+            return OP_MENU;
+        } 
+        if (localStorage.getItem('tipo') === 'CO') {
+            return CO_MENU;
+        } else {
+            return MENUITEMS;
+        }
         // return MY_MENU;
-        return EMPAQUES_MENU;
+        // return EMPAQUES_MENU;
     }
 }

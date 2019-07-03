@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Empaque, EmpaqueDetail } from '../../../shared/empaque/empaque';
 import { EmpaquesService } from '../../../services/empaques/empaques.service';
 import { TipoEmpaquesService } from '../../../services/tipo_empaques/tipo_empaques.service';
@@ -6,6 +7,7 @@ import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.se
 import { ClasesService } from '../../../services/clases/clases.service';
 
 import { CustodiosService } from '../../../services/custodios/custodios.service';
+import { LoginService } from '../../../services/login/login.service';
 
 @Component({
     selector: 'app-custodios-list',
@@ -48,6 +50,8 @@ export class CustodiosListComponent implements OnInit {
     ];
 
     constructor(private custodioService: CustodiosService,
+                private router: Router,
+                private loginService: LoginService,
                 ) { }
 
     ngOnInit() {
@@ -60,6 +64,7 @@ export class CustodiosListComponent implements OnInit {
             err => console.log('error: ' + err.status)
         );
 
+        this.loginService.isLoged('CO');
     }
 
     onActivate(event) {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TransaccionesService } from '../../../services/transacciones/transacciones.service';
+import { LoginService } from '../../../services/login/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -28,6 +29,7 @@ export class ConfirmacionesListComponent implements OnInit {
   }
 
   constructor(private transaccionService: TransaccionesService,
+              private loginService: LoginService,
               ) { }
 
   ngOnInit() {
@@ -43,6 +45,8 @@ export class ConfirmacionesListComponent implements OnInit {
       transacciones => this.transacciones = transacciones,    
       err => console.log('error: ' + err.status)
     );
+    
+    this.loginService.isLoged('OP');
 
   }
 

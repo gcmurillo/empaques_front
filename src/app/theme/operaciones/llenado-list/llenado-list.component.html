@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-header">
+  </div>
+  <div class="card-body">
+      <div class="table-content crm-table">
+          <div class="project-table">
+              <div id="crm-contact" class="dt-responsive">
+                <span class="m-b-20">Empaques por llenar</span><br><br>
+                  <div class="table-responsive">
+                      <ngx-datatable
+                        class="data-table"
+                        [rows]="rows"
+                        [columnMode]="'force'"
+                        [scrollbarH]="true"
+                        [headerHeight]="50"
+                        [footerHeight]="50"
+                        [rowHeight]="'auto'"
+                        [limit]="10"
+                        [messages]="empaques_messages"
+                        >
+                        <ngx-datatable-column name="Nombre Orden" prop="__str__" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Codigo Empaque" prop="codigo" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Tipo Empaque" prop="tipo_empaque.nombre" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Bodega" prop="ubicacion.bodega.nombre" ></ngx-datatable-column>
+                        <ngx-datatable-column name="Acciones" prop="">
+                          <ng-template ngx-datatable-cell-template let-row="row">
+                            <button class="btn btn-success ripple light" (click)="setLleno(row)">
+                                <i class="icofont icofont-check-circled"></i>Cambiar a Lleno
+                            </button>
+                          </ng-template>
+                      </ngx-datatable-column>
+                      </ngx-datatable>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

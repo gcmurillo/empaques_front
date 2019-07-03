@@ -22,6 +22,7 @@ import { CustodioCreate, Correo } from '../../../shared/custodio/custodio';
 
 // services
 import { CustodiosService } from '../../../services/custodios/custodios.service';
+import { LoginService } from '../../../services/login/login.service';
 
 
 @Component({
@@ -67,6 +68,7 @@ export class CustodiosCreateComponent implements OnInit {
     constructor(
         private custodioService: CustodiosService,
         private router: Router,
+        private loginService: LoginService,
     ) { }
 
     ngOnInit() {
@@ -93,6 +95,7 @@ export class CustodiosCreateComponent implements OnInit {
             err => console.log(err)
         );
 
+        this.loginService.isLoged('CO');
     }
 
     onSubmit() {

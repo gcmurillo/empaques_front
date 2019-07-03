@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Orden } from '../../../shared/orden/orden';
 import { TransaccionesService } from '../../../services/transacciones/transacciones.service';
 import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.service';
+import { LoginService } from '../../../services/login/login.service';
 
 @Component({
     selector: 'app-transacciones-desp',
@@ -47,6 +48,7 @@ export class TransaccionesDespComponent implements OnInit {
 
     constructor(private transaccionService: TransaccionesService,
                 private ubicacionesService: UbicacionesService,
+                private loginService: LoginService,
             ) { }
 
     ngOnInit() {
@@ -71,7 +73,8 @@ export class TransaccionesDespComponent implements OnInit {
             },
             err => console.log('error: ' + err.status)
         );
-
+        
+        this.loginService.isLoged('CO');
     }
 
     filtrar_aprobado(status) {

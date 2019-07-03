@@ -22,3 +22,10 @@ export class Ubicacion {
     public bodega: Bodega;
     public estado_disp: EstadoDisp;
 }
+
+
+export class LoginResult {
+    public token: string;
+    public bodega: Bodega;
+    public tipo: string;
+}

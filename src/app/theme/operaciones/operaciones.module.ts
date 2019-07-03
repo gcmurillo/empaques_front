@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { OperacionesRoutingModule } from './operaciones-routing.module';
 import { ConfirmacionesListComponent } from './confirmaciones-list/confirmaciones-list.component';
 import { RetornosListComponent } from './retornos-list/retornos-list.component';
+import { LlenadoListComponent } from './llenado-list/llenado-list.component';
 
 import {FormsModule, ReactiveFormsModule, FormGroup, Validators} from '@angular/forms';
 import {CustomValidators} from 'ng2-validation';
@@ -23,6 +24,6 @@ import {SharedModule} from '../../shared/shared.module';
     ArchwizardModule,
     SharedModule,
   ],
-  declarations: [ConfirmacionesListComponent, RetornosListComponent]
+  declarations: [ConfirmacionesListComponent, RetornosListComponent, LlenadoListComponent]
 })
 export class OperacionesModule { }

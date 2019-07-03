@@ -18,6 +18,7 @@ import { MarcasService } from '../../../services/marcas/marcas.service';
 import { ModelosService } from '../../../services/modelos/modelos.service';
 import { EstadosService } from '../../../services/estados/estados.service';
 import { CustodiosService } from '../../../services/custodios/custodios.service';
+import { LoginService } from '../../../services/login/login.service';
 
 
 @Component({
@@ -68,6 +69,7 @@ export class EmpaquesCreateComponent implements OnInit {
         private estadosService: EstadosService,
         private custodioService: CustodiosService,
         private router: Router,
+        private loginService: LoginService,
     ) { }
 
     ngOnInit() {
@@ -108,6 +110,8 @@ export class EmpaquesCreateComponent implements OnInit {
             custodios => this.custodios = custodios,
             err => console.log('error: ' + err.status)
         );
+
+        this.loginService.isLoged('OP');
     }
 
     onSubmit() {

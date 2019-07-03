@@ -4,6 +4,7 @@ import { EmpaquesService } from '../../../services/empaques/empaques.service';
 import { TipoEmpaquesService } from '../../../services/tipo_empaques/tipo_empaques.service';
 import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.service';
 import { ClasesService } from '../../../services/clases/clases.service';
+import { LoginService } from '../../../services/login/login.service';
 
 
 @Component({
@@ -70,6 +71,7 @@ export class EmpaquesListComponent implements OnInit {
                 private tipoEmpaqueService: TipoEmpaquesService,
                 private ubicacionesService: UbicacionesService,
                 private clasesService: ClasesService,
+                private loginService: LoginService,
                 ) { }
 
     ngOnInit() {
@@ -98,6 +100,8 @@ export class EmpaquesListComponent implements OnInit {
             clases => this.clases = clases,
             err => console.log('error: ' + err.status)
         );
+
+        this.loginService.isLoged('OP');
 
     }
 
