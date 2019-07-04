@@ -1,8 +1,13 @@
 <div class="card">
     <div class="card-header">
-        <button [routerLink]="['/custodios/custodios-create']" type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMyModal('effect-13')"> <i class="icofont icofont-plus m-r-5"></i> Nuevo
+        <button [routerLink]="['/custodios/custodios-create']" type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger"> <i class="icofont icofont-plus m-r-5"></i> Nuevo
         </button>
-        <input type="search" [(ngModel)]="filterQuery" class="form-control input-sm full-data-search" placeholder="Buscar por nombre">
+        <input
+        type="text"
+        class="form-control input-sm full-data-search"
+        placeholder="Buscar por nombre"
+        (keyup)="updateFilter($event)"
+      />
     </div>
     <div class="card-header">
     </div>
@@ -12,6 +17,7 @@
                 <div id="crm-contact" class="dt-responsive">
                     <div class="table-responsive">
                         <ngx-datatable
+                          #table
                           class="data-table"
                           [rows]="rows"
                           [columnMode]="'force'"

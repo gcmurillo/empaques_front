@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Empaque, EmpaqueDetail } from '../../../shared/empaque/empaque';
 import { EmpaquesService } from '../../../services/empaques/empaques.service';
 import { TipoEmpaquesService } from '../../../services/tipo_empaques/tipo_empaques.service';
@@ -23,6 +23,8 @@ export class EmpaquesListComponent implements OnInit {
     tipo_empaques = [];
     ubicaciones = [];
     clases = [];
+
+    @ViewChild('table') table: any;
 
     columns: any[] = [
         {
@@ -141,5 +143,19 @@ export class EmpaquesListComponent implements OnInit {
     }
 
     onActivate(event) {}
+
+    updateFilter(event) {
+        const val = event.target.value.toLowerCase();
+    
+        // filter our data
+        const temp = this.empaques.filter(function(d) {
+          return d.__str__.toLowerCase().indexOf(val) !== -1 || !val;
+        });
+    
+        // update the rows
+        this.rows = temp;
+        // Whenever the filter changes, always go back to the first page
+        this.table.offset = 0;
+    }
 
 }

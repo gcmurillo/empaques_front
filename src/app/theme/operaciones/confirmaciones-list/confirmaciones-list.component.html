@@ -6,8 +6,15 @@
           <div class="project-table">
               <div id="crm-contact" class="dt-responsive">
                 <span class="m-b-20">Empaques por confirmar</span><br><br>
+                <input
+                    type="text"
+                    class="form-control input-sm full-data-search"
+                    placeholder="Buscar por codigo"
+                    (keyup)="empaquesFilter($event)"
+                />
                   <div class="table-responsive">
                       <ngx-datatable
+                        #empaques
                         class="data-table"
                         [rows]="rows"
                         [columnMode]="'force'"
@@ -15,7 +22,7 @@
                         [headerHeight]="50"
                         [footerHeight]="50"
                         [rowHeight]="'auto'"
-                        [limit]="10"
+                        [limit]="5"
                         [messages]="empaques_messages"
                         >
                         <ngx-datatable-column name="Codigo Empaque" prop="empaque.codigo" ></ngx-datatable-column>
@@ -49,6 +56,12 @@
             <div class="project-table">
                 <div id="crm-contact" class="dt-responsive">
                     <span class="m-b-20">Ordenes</span><br><br>
+                    <input
+                    type="text"
+                    class="form-control input-sm full-data-search"
+                    placeholder="Buscar por nombre"
+                    (keyup)="ordenesFilter($event)"
+                    />
                     <div class="table-responsive">
                         <ngx-datatable
                         #myTable
@@ -59,7 +72,7 @@
                           [headerHeight]="50"
                           [footerHeight]="50"
                           [rowHeight]="'auto'"
-                          [limit]="10"
+                          [limit]="5"
                           [messages]="ordenes_messages">
                           <!-- Columns properties-->
                           <ngx-datatable-column name="Nombre" prop="nombre" ></ngx-datatable-column>

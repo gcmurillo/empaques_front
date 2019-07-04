@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { Empaque, EmpaqueDetail } from '../../../shared/empaque/empaque';
 import { EmpaquesService } from '../../../services/empaques/empaques.service';
@@ -25,6 +25,9 @@ export class CustodiosListComponent implements OnInit {
     clases = [];
     custodios = [];
 
+    filterText = '';
+
+    @ViewChild('table') table: any;
 
     columns: any[] = [
         {
@@ -65,6 +68,24 @@ export class CustodiosListComponent implements OnInit {
         );
 
         this.loginService.isLoged('CO');
+    }
+
+    filterTable() {
+        console.log(this.filterText);
+    }
+
+    updateFilter(event) {
+        const val = event.target.value.toLowerCase();
+    
+        // filter our data
+        const temp = this.custodios.filter(function(d) {
+          return d.__str__.toLowerCase().indexOf(val) !== -1 || !val;
+        });
+    
+        // update the rows
+        this.rows = temp;
+        // Whenever the filter changes, always go back to the first page
+        this.table.offset = 0;
     }
 
     onActivate(event) {}

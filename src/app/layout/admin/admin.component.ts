@@ -145,6 +145,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   public config: any;
   public searchInterval: any;
 
+  public tipo_usuario: any;
+
   scroll = (): void => {
     const scrollPosition = window.pageYOffset;
     if (scrollPosition > 50) {
@@ -221,6 +223,8 @@ export class AdminComponent implements OnInit, OnDestroy {
 
     this.setMenuAttributes(this.windowWidth);
     this.setHeaderAttributes(this.windowWidth);
+
+    this.tipo_usuario = (localStorage.getItem('tipo') === 'OP') ? 'Operaciones' : 'Comercial';
 
     // dark theme
     /*this.setLayoutType('dark');*/

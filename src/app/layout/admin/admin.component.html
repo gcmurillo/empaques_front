@@ -104,13 +104,13 @@
 
             <li (clickOutside)="notificationOutsideClick('profile')" class="user-profile header-notification ripple light" (click)="toggleProfileNotification()">
               <a href="javascript:">
-                <span>COMERCIAL</span>
+                <span>{{tipo_usuario}}</span>
                 <i class="feather icon-chevron-down"></i>
               </a>
               <ul [@notificationBottom]="profileNotification" class="show-notification profile-notification" [ngClass]="profileNotificationClass">
                 <li class="ripple">
                   <a [routerLink]="['/auth/login/simple/']" target="_blank">
-                    <i class="feather icon-log-out"></i> Logout
+                    <i class="feather icon-log-out"></i> Cerrar Sesion
                   </a>
                 </li>
               </ul>
@@ -381,12 +381,12 @@
             </div>
             <!--Menu de customizacion-->
             <div id="styleSelector" [ngClass]="configOpenRightBar">
-              <div class="selector-toggle">
+              <!--<div class="selector-toggle">
                 <a href="javascript:" placement="left" class="ripple light" ngbTooltip="Live layout customizer" (click)="toggleRightbar()"></a>
-              </div>
+              </div>-->
               <ul>
                 <li>
-                  <p class="selector-title main-title st-main-title"><b>AquaSolutions </b> Customizer</p><span class="text-muted">Live customizer with tons of options</span></li>
+                  <p class="selector-title main-title st-main-title"><b>Empaques </b> Customizer</p><span class="text-muted">Live customizer with tons of options</span></li>
                 <li>
                   <p class="selector-title">Main layouts</p>
                 </li>

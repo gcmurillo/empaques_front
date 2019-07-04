@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TransaccionesService } from '../../../services/transacciones/transacciones.service';
 import { LoginService } from '../../../services/login/login.service';
 import swal from 'sweetalert2';
@@ -17,6 +17,7 @@ export class ConfirmacionesListComponent implements OnInit {
   rows = [];
 
   transacciones = [];
+  transacciones_total = [];
 
   empaques_messages = {
     emptyMessage: "Sin empaques que aprobar",
@@ -28,6 +29,9 @@ export class ConfirmacionesListComponent implements OnInit {
     totalMessage: " Ordenes"
   }
 
+  @ViewChild('empaques') tablaEmpaques: any;
+  @ViewChild('ordenes') tablaOrdenes: any;
+
   constructor(private transaccionService: TransaccionesService,
               private loginService: LoginService,
               ) { }
@@ -36,13 +40,17 @@ export class ConfirmacionesListComponent implements OnInit {
     this.transaccionService.getOrdenesEmpaques().subscribe(
       ordenes => { 
         this.rows = ordenes;
+        this.ordenes = ordenes;
         console.log(ordenes);
       },
       err => console.log('error: ' + err.status)
     );
 
     this.transaccionService.getTransaccionesNoDespachadas().subscribe(
-      transacciones => this.transacciones = transacciones,    
+      transacciones => {
+        this.transacciones = transacciones;
+        this.transacciones_total = transacciones;
+      },    
       err => console.log('error: ' + err.status)
     );
     
@@ -110,5 +118,33 @@ export class ConfirmacionesListComponent implements OnInit {
   }
 
   onActivate(event) {}
+
+  empaquesFilter(event) {
+    const val = event.target.value.toLowerCase();
+
+    // filter our data
+    const temp = this.ordenes.filter(function(d) {
+      return d.empaque.__str__.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    // update the rows
+    this.rows = temp;
+    // Whenever the filter changes, always go back to the first page
+    this.tablaEmpaques.offset = 0;
+  }
+
+  ordenesFilter(event) {
+    const val = event.target.value.toLowerCase();
+
+    // filter our data
+    const temp = this.transacciones_total.filter(function(d) {
+      return d.nombre.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    // update the rows
+    this.transacciones = temp;
+    // Whenever the filter changes, always go back to the first page
+    this.tablaOrdenes.offset = 0;
+  }
 
 }
