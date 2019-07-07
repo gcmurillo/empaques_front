@@ -11,6 +11,7 @@ import {DataTableModule} from 'angular2-datatable';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {ArchwizardModule} from 'ng2-archwizard/dist';
 import {SharedModule} from '../../shared/shared.module';
+import { PapaParseModule } from 'ngx-papaparse';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {SharedModule} from '../../shared/shared.module';
     ReactiveFormsModule,
     ArchwizardModule,
     SharedModule,
+    PapaParseModule,
   ],
   declarations: [EmpaquesCreateComponent, EmpaquesListComponent]
 })

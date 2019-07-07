@@ -1,13 +1,31 @@
 <div class="card">
     <div class="card-header">
-        <button [routerLink]="['/empaques/empaques-create']" type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="openMyModal('effect-13')"> <i class="icofont icofont-plus m-r-5"></i> Nuevo
+        <button [routerLink]="['/empaques/empaques-create']" type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger"> <i class="icofont icofont-plus m-r-5"></i> Nuevo
         </button>
+        <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="modalDefault.show()">Subir por CSV</button>
         <input
         type="text"
         class="form-control input-sm full-data-search"
         placeholder="Buscar por nombre"
         (keyup)="updateFilter($event)"
       />
+          <app-modal-basic #modalDefault>
+            <div class="app-modal-header">
+              <h4 class="modal-title">Agregar cilindros por archivo</h4>
+              <button type="button" class="close basic-close" (click)="modalDefault.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="app-modal-body">
+              <h5>Instrucciones</h5>
+              <p>El único tipo de archivo aceptado es CSV. El formato es el siguiente: codigo,serie,bodega,estado,clase,custodio</p>
+              <input type="file" accept=".csv" (change)="handleFileSelect($event)">
+            </div>
+            <div class="app-modal-footer">
+              <button type="button" class="btn btn-default ripple" (click)="modalDefault.hide()">Cerrar</button>
+              <button (click)="addEmpaques()" type="button" class="btn btn-primary ripple light">Subir</button>
+            </div>
+          </app-modal-basic>
     </div>
     <div class="card-header">
         <div ngbDropdown class="btn-group dropdown-split-primary" style="margin-right: 10px">

@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Empaque, EmpaqueDetail } from '../../../shared/empaque/empaque';
 import { EmpaquesService } from '../../../services/empaques/empaques.service';
 import { TipoEmpaquesService } from '../../../services/tipo_empaques/tipo_empaques.service';
 import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.service';
 import { ClasesService } from '../../../services/clases/clases.service';
 import { LoginService } from '../../../services/login/login.service';
+import { Papa } from 'ngx-papaparse';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -23,8 +26,11 @@ export class EmpaquesListComponent implements OnInit {
     tipo_empaques = [];
     ubicaciones = [];
     clases = [];
+    fileToUpload: any;
 
     @ViewChild('table') table: any;
+    @ViewChild('modalDefault') modal: any;
+
 
     columns: any[] = [
         {
@@ -74,6 +80,7 @@ export class EmpaquesListComponent implements OnInit {
                 private ubicacionesService: UbicacionesService,
                 private clasesService: ClasesService,
                 private loginService: LoginService,
+                private papa: Papa,
                 ) { }
 
     ngOnInit() {
@@ -158,4 +165,64 @@ export class EmpaquesListComponent implements OnInit {
         this.table.offset = 0;
     }
 
+    test = [];
+    data_multiple = [];
+    handleFileSelect(evt) {
+      var files = evt.target.files; // FileList object
+      var file = files[0];
+      var reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = (event: any) => {
+        var csv = event.target.result; // Content of CSV file
+        this.papa.parse(csv, {
+          skipEmptyLines: true,
+          header: true,
+          complete: (results) => {
+            for (let i = 0; i < results.data.length; i++) {
+              let empaquesDetails = {
+                bodega: results.data[i].bodega,
+                clase: results.data[i].clase,
+                codigo: results.data[i].codigo,
+                custodio: results.data[i].custodio,
+                estado: results.data[i].estado,
+                serie: results.data[i].serie,
+              };
+             this.test.push(empaquesDetails);
+            }
+            // console.log(this.test);
+            console.log('Parsed: k', results.data);
+            this.data_multiple = results.data;
+          }
+        });
+      }
+    }
+
+    addEmpaques() {
+        this.empaqueService.addMultipleEmpaques(this.data_multiple).subscribe(
+            response => {
+                swal(
+                    'Creado',
+                    'El empaque fue creado con éxito.',
+                    'success'
+                );
+                this.empaqueService.getEmpaques().subscribe(
+                    empaques => {
+                        this.rows = empaques;
+                        this.empaques = empaques;
+                    },
+                    err => console.log('error: ' + err.status)
+                );        
+                this.modal.hide();
+            },
+            err => {
+                console.log(err)
+                swal(
+                    'Error',
+                    'Error al crear cilindros con archivo.' + err.error,
+                    'error'
+                );
+                this.modal.hide();
+            }
+        );
+    }
 }

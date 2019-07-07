@@ -44,4 +44,8 @@ export class EmpaquesService {
         return this.http.put<EmpaqueDetail[]>(myGlobals.apiURL + myGlobals.LLENAR_EMPAQUE + pk +'/', empaque);
     }
 
+    public addMultipleEmpaques(data: Array<any>): Observable<any[]>{
+        return this.http.post<Array<any>>(myGlobals.apiURL + myGlobals.CREAR_EMPAQUES_MULTIPLES, data);
+    }
+
 }
