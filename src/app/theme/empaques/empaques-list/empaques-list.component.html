@@ -1,8 +1,9 @@
 <div class="card">
     <div class="card-header">
-        <button [routerLink]="['/empaques/empaques-create']" type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger"> <i class="icofont icofont-plus m-r-5"></i> Nuevo
+        <button [routerLink]="['/empaques/empaques-create']" type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" style="margin-right: 10px"> <i class="icofont icofont-plus m-r-5"></i> Nuevo
         </button>
-        <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="modalDefault.show()">Subir por CSV</button>
+        <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="modalDefault.show()" style="margin-right: 10px">Subir por CSV</button>
+        <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="export()" style="margin-right: 10px">Exportar a EXCEL</button>
         <input
         type="text"
         class="form-control input-sm full-data-search"
@@ -75,6 +76,7 @@
                     <div class="table-responsive">
                         <ngx-datatable
                         #table
+                        id="table"
                           class="data-table"
                           [rows]="rows"
                           [columnMode]="'force'"

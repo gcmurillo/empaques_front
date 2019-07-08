@@ -6,6 +6,7 @@ import { TipoEmpaquesService } from '../../../services/tipo_empaques/tipo_empaqu
 import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.service';
 import { ClasesService } from '../../../services/clases/clases.service';
 import { LoginService } from '../../../services/login/login.service';
+import { ExcelService } from '../../../services/excel/excel.service';
 import { Papa } from 'ngx-papaparse';
 import swal from 'sweetalert2';
 
@@ -81,6 +82,7 @@ export class EmpaquesListComponent implements OnInit {
                 private clasesService: ClasesService,
                 private loginService: LoginService,
                 private papa: Papa,
+                private excelService:ExcelService,
                 ) { }
 
     ngOnInit() {
@@ -225,4 +227,22 @@ export class EmpaquesListComponent implements OnInit {
             }
         );
     }
+
+    export() {
+        let data = [];
+        for (let row of this.rows) {
+            let obj = {
+                "nombre": row.__str__,
+                "codigo": row.codigo,
+                "clase": row.clase.nombre,
+                "serie": row.serie,
+                "estado": row.estado.nombre,
+                "ubicacion": row.ubicacion.__str__,
+                "empresa_custodio": row.custodio.representante.empresa.nombre,
+                "custodio": row.custodio.__str__
+            }
+            data.push(obj);
+        }
+        this.excelService.exportAsExcelFile(data, 'datos_empaques');
+      }
 }

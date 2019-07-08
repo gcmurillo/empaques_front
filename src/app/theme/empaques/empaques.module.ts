@@ -12,6 +12,7 @@ import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {ArchwizardModule} from 'ng2-archwizard/dist';
 import {SharedModule} from '../../shared/shared.module';
 import { PapaParseModule } from 'ngx-papaparse';
+import { ExportAsModule } from 'ngx-export-as';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { PapaParseModule } from 'ngx-papaparse';
     ArchwizardModule,
     SharedModule,
     PapaParseModule,
+    ExportAsModule,
   ],
   declarations: [EmpaquesCreateComponent, EmpaquesListComponent]
 })
