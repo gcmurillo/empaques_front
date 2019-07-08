@@ -68,7 +68,7 @@
     "ngx-quill-editor": "^2.2.2",
     "ngx-tour-ng-bootstrap": "^2.0.1",
     "nouislider": "^11.1.0",
-    "rxjs": "^6.0.0",
+    "rxjs": "6.0.0",
     "rxjs-compat": "^6.1.0",
     "screenfull": "^3.3.2",
     "squeezebox": "^1.4.0",
