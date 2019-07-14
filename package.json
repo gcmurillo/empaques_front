@@ -42,6 +42,7 @@
     "core-js": "^2.5.4",
     "css-animator": "^2.3.0",
     "d3": "^5.1.0",
+    "docxtemplater": "^3.13.6",
     "famfamfam-flags": "^1.0.0",
     "file-saver": "^2.0.2",
     "font-awesome-scss": "^1.0.0",

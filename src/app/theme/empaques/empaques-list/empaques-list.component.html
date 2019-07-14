@@ -22,9 +22,21 @@
               <p>El único tipo de archivo aceptado es CSV. El formato es el siguiente: codigo,serie,bodega,estado,clase,custodio</p>
               <input type="file" accept=".csv" (change)="handleFileSelect($event)">
             </div>
+            <div class="loader-block" *ngIf="loading_add === true">
+              <svg id="loader2" viewBox="0 0 100 100">
+                <circle id="circle-loader2" cx="50" cy="50" r="45"></circle>
+              </svg>
+              Procesando...
+            </div>
             <div class="app-modal-footer">
               <button type="button" class="btn btn-default ripple" (click)="modalDefault.hide()">Cerrar</button>
               <button (click)="addEmpaques()" type="button" class="btn btn-primary ripple light">Subir</button>
+              <div *ngIf="loading_add === true">
+                  <svg id="loader2" viewBox="0 0 100 100">
+                      <circle id="circle-loader2" cx="50" cy="50" r="45"></circle>
+                  </svg>
+                Procesando...
+              </div>
             </div>
           </app-modal-basic>
     </div>

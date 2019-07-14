@@ -31,7 +31,7 @@ export class EmpaquesListComponent implements OnInit {
 
     @ViewChild('table') table: any;
     @ViewChild('modalDefault') modal: any;
-
+    loading_add = false;
 
     columns: any[] = [
         {
@@ -42,26 +42,26 @@ export class EmpaquesListComponent implements OnInit {
             prop: 'codigo',
             name: 'Codigo'
         },
-        {
-            prop: 'codigo_barras',
-            name: 'Codigo Barras'
-        },
+        //{
+        //    prop: 'codigo_barras',
+        //    name: 'Codigo Barras'
+        //},
         {
             prop: 'serie',
             name: 'Serie'
         },
-        {
+        /*{
             prop: 'tipo_empaque.nombre',
             name: 'Tipo Empaque'
-        },
+        },*/
         {
             prop: 'clase.nombre',
             name: 'Clase'
         },
-        {
+        /*{
             prop: 'modelo.nombre',
             name: 'Modelo'
-        },
+        },*/
         {
             prop: 'estado.nombre',
             name: 'Estado'
@@ -71,7 +71,7 @@ export class EmpaquesListComponent implements OnInit {
             name: 'Ubicacion'
         },
         {
-            prop: 'custodio.__str__',
+            prop: 'custodio.representante.empresa.nombre',
             name: 'Custodio'
         },
     ];
@@ -200,6 +200,8 @@ export class EmpaquesListComponent implements OnInit {
     }
 
     addEmpaques() {
+        this.loading_add = true;
+        console.log(this.loading_add);
         this.empaqueService.addMultipleEmpaques(this.data_multiple).subscribe(
             response => {
                 swal(
@@ -215,17 +217,29 @@ export class EmpaquesListComponent implements OnInit {
                     err => console.log('error: ' + err.status)
                 );        
                 this.modal.hide();
+                this.loading_add = false;
+                console.log(this.loading_add);
             },
             err => {
                 console.log(err)
                 swal(
-                    'Error',
-                    'Error al crear cilindros con archivo.' + err.error,
-                    'error'
+                    'Advertencia',
+                    'Estos cilindros no pudieron ser agregados: ' + err.error.cilindros,
+                    'warning'
                 );
+                this.empaqueService.getEmpaques().subscribe(
+                    empaques => {
+                        this.rows = empaques;
+                        this.empaques = empaques;
+                    },
+                    err => console.log('error: ' + err.status)
+                );  
                 this.modal.hide();
+                this.loading_add = false;
+                console.log(this.loading_add);
             }
         );
+
     }
 
     export() {
