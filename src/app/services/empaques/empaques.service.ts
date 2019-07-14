@@ -32,8 +32,8 @@ export class EmpaquesService {
         return this.http.get<Empaque[]>(myGlobals.apiURL + myGlobals.EMPAQUES + query);
     }
 
-    public getEmpaquesDisponibles(): Observable<Empaque[]> {
-        return this.http.get<Empaque[]>(myGlobals.apiURL + myGlobals.EMPAQUES_DISPONIBLES);
+    public getEmpaquesDisponibles(): Observable<EmpaqueDetail[]> {
+        return this.http.get<EmpaqueDetail[]>(myGlobals.apiURL + myGlobals.EMPAQUES_DISPONIBLES);
     }
 
     public getEmpaquesVacios(): Observable<Empaque[]> {

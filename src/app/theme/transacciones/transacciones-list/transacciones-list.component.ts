@@ -113,5 +113,18 @@ export class TransaccionesListComponent implements OnInit {
         this.table.rowDetail.toggleExpandRow(row);
       }
     
+    updateFilter(event) {
+        const val = event.target.value.toLowerCase();
+    
+        // filter our data
+        const temp = this.transacciones.filter(function(d) {
+          return d.__str__.toLowerCase().indexOf(val) !== -1 || !val;
+        });
+    
+        // update the rows
+        this.rows = temp;
+        // Whenever the filter changes, always go back to the first page
+        this.table.offset = 0;
+    }
 
 }

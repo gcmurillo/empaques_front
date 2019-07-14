@@ -31,7 +31,7 @@ export class TransaccionesCreateComponent implements OnInit {
     selected = [];
     custodios = [];
     ubicaciones = [];
-    bodega_selected = '';
+    bodega_selected = localStorage.getItem('bodega');
     ordenesEmpaques = [];
     transacciones_list = [];
 
@@ -42,7 +42,7 @@ export class TransaccionesCreateComponent implements OnInit {
         {
             nombre: new FormControl(''),
             descripcion: new FormControl(''),
-            bodega: new FormControl(''),
+            // bodega: new FormControl(''),
             fecha_inicio: new FormControl(''),
             dias_plazo: new FormControl('30'),
             nuevo_custodio: new FormControl(''),
@@ -89,7 +89,7 @@ export class TransaccionesCreateComponent implements OnInit {
     }
 
     disabledSecondPage() {
-        if (this.transaccionForm.value.bodega !== '' &&
+        if (// this.transaccionForm.value.bodega !== '' &&
             this.transaccionForm.value.fecha_inicio !== '' &&
             this.transaccionForm.value.dias_plazo !== '' &&
             this.transaccionForm.value.nombre !== '' &&
@@ -114,7 +114,7 @@ export class TransaccionesCreateComponent implements OnInit {
         const bodega = this.transaccionForm.value.bodega !== '' ? this.transaccionForm.value.bodega : null;
         const fecha_inicio = this.transaccionForm.value.fecha_inicio;
         const dias_plazo = this.transaccionForm.value.dias_plazo;
-        if (bodega !== null && fecha_inicio !== '' && dias_plazo !== '') {
+        if (fecha_inicio !== '' && dias_plazo !== '') {
             const query = '?bodega=' + bodega + '&estado=1&estado_disp=1';
             /*this.empaquesService.getEmpaquebyQuery(query).subscribe(
                 empaques => this.empaques_get = empaques,
@@ -122,7 +122,8 @@ export class TransaccionesCreateComponent implements OnInit {
             );*/
             this.empaquesService.getEmpaquesDisponibles().subscribe(
                 empaques => {
-                    this.empaques_get = empaques;
+                    this.empaques_get = empaques.filter(emp => emp.ubicacion.bodega.nombre === this.bodega_selected);
+                    console.log(this.empaques_get);
                 },
                 err => console.log(err)
             );
@@ -142,14 +143,13 @@ export class TransaccionesCreateComponent implements OnInit {
         this.transaccion_object.fecha_inicio = fecha;
         this.transaccion_object.nuevo_custodio = +this.transaccionForm.value.nuevo_custodio;
         const ubicacion_inicial = this.ubicaciones.filter(
-            ubicacion => ubicacion.bodega.id === +this.transaccionForm.value.bodega &&
+            ubicacion => ubicacion.bodega.nombre === this.bodega_selected &&
                          ubicacion.estado_disp.id === 1
         )[0];
         const nueva_ubicacion = this.ubicaciones.filter(
-            ubicacion => ubicacion.bodega.id === +this.transaccionForm.value.bodega &&
+            ubicacion => ubicacion.bodega.nombre === this.bodega_selected &&
                          ubicacion.estado_disp.id === 3
         )[0];
-        this.bodega_selected = ubicacion_inicial.bodega.nombre;
         this.transaccion_object.ubicacion_inicial = ubicacion_inicial.id;
         this.transaccion_object.nueva_ubicacion = nueva_ubicacion.id;
         console.log(this.transaccion_object);
