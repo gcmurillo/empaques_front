@@ -177,7 +177,7 @@ export class TransaccionesListComponent implements OnInit {
             type: 'blob',
             mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
           }) // Output the document using Data-URI
-          saveAs(out, 'output.pdf')
+          saveAs(out, 'output.docx')
         })
       }
 
