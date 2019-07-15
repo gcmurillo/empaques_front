@@ -48,6 +48,8 @@
     "font-awesome-scss": "^1.0.0",
     "hammerjs": "^2.0.8",
     "jquery": "^3.4.1",
+    "jszip": "^2.6.1",
+    "jszip-utils": "^0.1.0",
     "moment": "^2.22.2",
     "ng-click-outside": "^3.3.0",
     "ng-select": "^1.0.0-rc.5",

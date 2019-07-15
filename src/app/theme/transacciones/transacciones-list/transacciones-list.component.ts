@@ -4,6 +4,11 @@ import { TransaccionesService } from '../../../services/transacciones/transaccio
 import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.service';
 import { LoginService } from '../../../services/login/login.service';
 
+import docxtemplater from 'docxtemplater';
+import * as JSZip from 'jszip';
+import * as JSZipUtils from 'jszip-utils';
+declare const require: any;
+import { saveAs } from 'file-saver';
 
 @Component({
     selector: 'app-transacciones-list',
@@ -23,6 +28,8 @@ export class TransaccionesListComponent implements OnInit {
     bodegas = [];
     ordenes_empaques = [];
     empaques: any = {};
+    URL = '../../../../assets/cartas_templates/carta_template.docx';
+
 
     columns: any[] = [
         {
@@ -126,5 +133,52 @@ export class TransaccionesListComponent implements OnInit {
         // Whenever the filter changes, always go back to the first page
         this.table.offset = 0;
     }
+
+    loadFileGeneration(row) { // On click function which triggers docxTemplater function.
+        var today = new Date();
+        var dd = today.getDate() + 1;
+        var mm = today.getMonth(); //January is 0!
+        var yyyy = today.getFullYear();
+        console.log(dd, mm, yyyy);
+        var event = new Date(Date.UTC(yyyy, mm, dd, 0, 0, 0));
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+        console.log(event.toLocaleDateString('es-ES', options));
+        var fecha = event.toLocaleDateString('es-ES', options);
+        function loadFile(url, callback) {
+          JSZipUtils.getBinaryContent(url, callback);
+        };
+        loadFile(this.URL, function (error, content) {
+          if (error) { throw error };
+          const zip = new JSZip(content);
+          const doc = new docxtemplater().loadZip(zip)
+          doc.setData({
+            empresa: row.nuevo_custodio.representante.empresa.nombre,
+            representante: row.nuevo_custodio.representante.nombre,
+            fecha: fecha,
+            ruc: row.nuevo_custodio.representante.empresa.RUC,
+            empaques: row.empaques,
+            cantidad_empaques: row.empaques.length,
+          });
+          try {
+            // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+            doc.render()
+          } catch (error) {
+            const e = {
+              message: error.message,
+              name: error.name,
+              stack: error.stack,
+              properties: error.properties,
+            }
+            console.log(JSON.stringify({ error: e }));
+            // The error thrown here contains additional information when logged with JSON.stringify (it contains a property object).
+            throw error;
+          }
+          const out = doc.getZip().generate({
+            type: 'blob',
+            mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          }) // Output the document using Data-URI
+          saveAs(out, 'output.pdf')
+        })
+      }
 
 }

@@ -120,6 +120,13 @@
                                   {{ value.vendedor.nombre }}
                               </ng-template>
                           </ngx-datatable-column>
+                          <ngx-datatable-column name="Acciones" prop="retornado">
+                                <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+                                  <button class="btn btn-success ripple light" (click)="loadFileGeneration(row)">
+                                      <i class="icofont icofont-check-circled"></i>Generar Carta
+                                  </button>
+                                </ng-template>
+                            </ngx-datatable-column>
                         </ngx-datatable>
                     </div>
                 </div>
