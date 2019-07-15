@@ -39,8 +39,8 @@ export class ConfirmacionesListComponent implements OnInit {
   ngOnInit() {
     this.transaccionService.getOrdenesEmpaques().subscribe(
       ordenes => { 
-        this.rows = ordenes;
-        this.ordenes = ordenes;
+        this.rows = ordenes.filter(row => row.empaque.ubicacion.bodega.nombre === localStorage.getItem('bodega'));
+        this.ordenes = this.rows;
         console.log(ordenes);
       },
       err => console.log('error: ' + err.status)
@@ -48,8 +48,8 @@ export class ConfirmacionesListComponent implements OnInit {
 
     this.transaccionService.getTransaccionesNoDespachadas().subscribe(
       transacciones => {
-        this.transacciones = transacciones;
-        this.transacciones_total = transacciones;
+        this.transacciones = transacciones.filter(row => row.ubicacion_inicial.bodega.nombre === localStorage.getItem('bodega'));
+        this.transacciones_total = this.transacciones;
       },    
       err => console.log('error: ' + err.status)
     );

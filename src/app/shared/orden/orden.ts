@@ -1,7 +1,7 @@
 import { TipoOrden } from '../tipo_orden/tipo_orden';
 import { Ubicacion } from '../ubicacion/ubicacion';
 import { Custodio } from '../custodio/custodio';
-import { Empaque } from '../empaque/empaque';
+import { Empaque, EmpaqueDetail } from '../empaque/empaque';
 
 export class Orden {
     public __str__: string;
@@ -33,7 +33,7 @@ export class OrdenEmpaqueDetailList {
     public id: number;
     public __str__: string;
     public orden: Orden;
-    public empaque: Empaque;
+    public empaque: EmpaqueDetail;
     public aprobado: boolean;
     public entregado: boolean;
 }

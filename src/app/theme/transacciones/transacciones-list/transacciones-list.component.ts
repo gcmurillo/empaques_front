@@ -9,6 +9,7 @@ import * as JSZip from 'jszip';
 import * as JSZipUtils from 'jszip-utils';
 declare const require: any;
 import { saveAs } from 'file-saver';
+import swal from 'sweetalert2';
 
 @Component({
     selector: 'app-transacciones-list',
@@ -28,6 +29,8 @@ export class TransaccionesListComponent implements OnInit {
     bodegas = [];
     ordenes_empaques = [];
     empaques: any = {};
+    costo_carta = 0;
+    tamano_carta = 0;
     URL = '../../../../assets/cartas_templates/carta_template.docx';
 
 
@@ -139,18 +142,20 @@ export class TransaccionesListComponent implements OnInit {
         var dd = today.getDate() + 1;
         var mm = today.getMonth(); //January is 0!
         var yyyy = today.getFullYear();
-        console.log(dd, mm, yyyy);
+        console.log(row);
         var event = new Date(Date.UTC(yyyy, mm, dd, 0, 0, 0));
         var options = { year: 'numeric', month: 'long', day: 'numeric' };
         console.log(event.toLocaleDateString('es-ES', options));
         var fecha = event.toLocaleDateString('es-ES', options);
+        var costo = this.costo_carta;
+        var tamano = this.tamano_carta;
         function loadFile(url, callback) {
           JSZipUtils.getBinaryContent(url, callback);
         };
         loadFile(this.URL, function (error, content) {
           if (error) { throw error };
           const zip = new JSZip(content);
-          const doc = new docxtemplater().loadZip(zip)
+          const doc = new docxtemplater().loadZip(zip);
           doc.setData({
             empresa: row.nuevo_custodio.representante.empresa.nombre,
             representante: row.nuevo_custodio.representante.nombre,
@@ -158,6 +163,9 @@ export class TransaccionesListComponent implements OnInit {
             ruc: row.nuevo_custodio.representante.empresa.RUC,
             empaques: row.empaques,
             cantidad_empaques: row.empaques.length,
+            dias: row.dias_plazo,
+            costo: costo,
+            tamano: tamano,
           });
           try {
             // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
@@ -180,5 +188,60 @@ export class TransaccionesListComponent implements OnInit {
           saveAs(out, 'output.docx')
         })
       }
+
+      openCrearCarta(row) {
+        swal.resetDefaults();
+        swal.setDefaults({
+          input: 'text',
+          confirmButtonText: 'Siguiente &rarr;',
+          showCancelButton: true,
+          progressSteps: ['1', '2']
+        });
+    
+        const steps = [
+          {
+            title: 'Tamaño',
+            text: '64 o 66'
+          },
+          {
+            title: 'Costo',
+            text: 'Costo en Dolares'
+          }
+        ];
+    
+        swal.queue(steps).then((data) => {
+          
+          if (data.value) {
+            swal.resetDefaults();
+            swal({
+              title: 'Resumen',
+              html:
+              'Tus datos: <pre>' +
+              JSON.stringify(data.value) +
+              '</pre>',
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Crear carta',
+              cancelButtonText: 'Cancelar',
+              confirmButtonClass: 'btn btn-success',
+              cancelButtonClass: 'btn btn-danger mr-sm',
+              showCancelButton: true
+            }).then((result) => {
+                if (result.value) {
+                    this.tamano_carta = data.value[0];
+                    this.costo_carta = data.value[1];
+                    this.loadFileGeneration(row);
+                } else if (result.dismiss) {
+                    swal.resetDefaults();
+                    swal(
+                        'Cancelado',
+                        'La empresa no fue creada',
+                        'error'
+                    );
+                }
+            });
+          }
+        });
+    }
 
 }

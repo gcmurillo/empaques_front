@@ -9,6 +9,14 @@
         class="form-control input-sm full-data-search"
         placeholder="Buscar por nombre"
         (keyup)="updateFilter($event)"
+        style="margin-right: 10px"
+      />
+      <input
+        type="text"
+        class="form-control input-sm full-data-search"
+        placeholder="Buscar por custodio"
+        (keyup)="updateFilterCustodio($event)"
+        style="margin-right: 10px"
       />
           <app-modal-basic #modalDefault>
             <div class="app-modal-header">

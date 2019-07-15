@@ -21,12 +21,12 @@
                                 <label class="float-label">Descripcion</label>
                             </div>
                             <div class="form-group row">
-                                <!--<label class="col-sm-1 col-form-label">Bodega</label>
+                                <label class="col-sm-1 col-form-label">Bodega</label>
                                 <div class="col-sm-2">
                                     <select name="select" class="form-control" formControlName="bodega">
                                         <option [value]="bodega.id" *ngFor="let bodega of bodegas">{{ bodega.nombre }}</option>
                                     </select>
-                                </div>-->
+                                </div>
                                 <label class="col-sm-1 col-form-label">Fecha Inicio</label>
                                 <div class="col-sm-2">
                                     <div class="form-group">
@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
                                 <label class="col-sm-1 col-form-label">Nuevo Custodio</label>
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <select name="select" class="form-control" formControlName="nuevo_custodio">
                                         <option [value]="custodio.id" *ngFor="let custodio of custodios">{{ custodio.__str__ }}</option>
                                     </select>
@@ -62,9 +62,16 @@
                 <div class="centered-content">
                     <div>
                         <h3>Eleccion de Empaques</h3>
+                        <input
+                            type="text"
+                            class="form-control input-sm full-data-search"
+                            placeholder="Buscar por bodega"
+                            (keyup)="updateEmpaquesTable($event)"
+                        />
                         <ngx-datatable
+                          #myTable
                           class="data-table dt-chk"
-                          [rows]="empaques_get"
+                          [rows]="empaques_get_rows"
                           [columnMode]="'force'"
                           [scrollbarH]="true"
                           [headerHeight]="50"
