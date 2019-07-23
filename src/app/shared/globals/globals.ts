@@ -31,4 +31,5 @@ export const LOGIN = 'api/login/';
 
 export const sep = '/';
 // export const apiURL = 'http://localhost:8000/';
-export const apiURL = 'http://172.19.50.81:8000/';
+export const apiURL = 'http://172.19.50.81:8002/';
+
