@@ -3,6 +3,7 @@ import { Orden } from '../../../shared/orden/orden';
 import { TransaccionesService } from '../../../services/transacciones/transacciones.service';
 import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.service';
 import { LoginService } from '../../../services/login/login.service';
+import { ExcelService } from '../../../services/excel/excel.service';
 
 import docxtemplater from 'docxtemplater';
 import * as JSZip from 'jszip';
@@ -60,6 +61,7 @@ export class TransaccionesListComponent implements OnInit {
     constructor(private transaccionService: TransaccionesService,
                 private ubicacionesService: UbicacionesService,
                 private loginService: LoginService,
+                private excelService:ExcelService,
             ) { }
 
     ngOnInit() {
@@ -242,6 +244,28 @@ export class TransaccionesListComponent implements OnInit {
             });
           }
         });
+    }
+
+    export() {
+      let data = [];
+      for (let row of this.rows) {
+          let emps = '';
+          for (let emp of row.empaques) {
+            emps += emp.codigo + ';'
+          }
+          let obj = {
+              "nombre": row.nombre,
+              "bodega": row.nueva_ubicacion.bodega.nombre,
+              "fecha_inicio": row.fecha_inicio,
+              "fecha_final": row.fecha_final,
+              "dias_plazo": row.dias_plazo,
+              "custodio": row.nuevo_custodio.representante.empresa.nombre,
+              "empaques": emps
+          }
+          data.push(obj);
+      }
+      console.log(data);
+      this.excelService.exportAsExcelFile(data, 'datos_transacciones_no_despachadas');
     }
 
 }

@@ -5,6 +5,7 @@ import { EmpaquesService } from '../../../services/empaques/empaques.service';
 import { TipoEmpaquesService } from '../../../services/tipo_empaques/tipo_empaques.service';
 import { UbicacionesService } from '../../../services/ubicaciones/ubicaciones.service';
 import { ClasesService } from '../../../services/clases/clases.service';
+import { ExcelService } from '../../../services/excel/excel.service';
 
 import { CustodiosService } from '../../../services/custodios/custodios.service';
 import { LoginService } from '../../../services/login/login.service';
@@ -55,6 +56,7 @@ export class CustodiosListComponent implements OnInit {
     constructor(private custodioService: CustodiosService,
                 private router: Router,
                 private loginService: LoginService,
+                private excelService:ExcelService,
                 ) { }
 
     ngOnInit() {
@@ -89,5 +91,19 @@ export class CustodiosListComponent implements OnInit {
     }
 
     onActivate(event) {}
+
+    export() {
+        let data = [];
+        for (let row of this.rows) {
+            let obj = {
+                "nombre": row.__str__,
+                "representante": row.representante.nombre,
+                "empresa": row.representante.empresa.nombre,
+                "vendedor": row.vendedor.nombre
+            }
+            data.push(obj);
+        }
+        this.excelService.exportAsExcelFile(data, 'datos_custodios');
+    }
 
 }
