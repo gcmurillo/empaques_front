@@ -63,7 +63,8 @@ export class ConfirmacionesListComponent implements OnInit {
       "orden": row.orden.id,
       "empaque": row.empaque.codigo,
       "aprobado": value,
-      "entregado": row.entregado
+      "entregado": row.entregado,
+      "observacion_retorno": "",
     }
     this.transaccionService.editOrdenEmpaque(data, row.id).subscribe(
       response => {

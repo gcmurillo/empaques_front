@@ -43,6 +43,7 @@ export class OrdenEmpaqueDetailCreate {
     public empaque: string;
     public aprobado: boolean;
     public entregado: boolean;
+    public observacion_retorno: string;
 }
 
 export class OrdenDespachar {

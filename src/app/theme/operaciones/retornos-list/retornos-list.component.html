@@ -30,11 +30,8 @@
                         </ngx-datatable-column>
                         <ngx-datatable-column name="Acciones" prop="retornado">
                           <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-                            <button class="btn btn-success ripple light" *ngIf="!value" (click)="setRetorno(row, true)">
+                            <button class="btn btn-success ripple light" *ngIf="!value" (click)="openRetornoPop(row, true)">
                                 <i class="icofont icofont-check-circled"></i>Aprobar retorno
-                            </button>
-                            <button class="btn btn-danger ripple light" *ngIf="value" (click)="setRetorno(row, false)">
-                                <i class="icofont icofont-eye-alt"></i>Desaprobar 
                             </button>
                           </ng-template>
                       </ngx-datatable-column>

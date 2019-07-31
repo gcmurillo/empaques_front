@@ -42,12 +42,13 @@ export class RetornosListComponent implements OnInit {
     this.loginService.isLoged('OP');
   }
 
-  setRetorno(row, value) {
+  setRetorno(row, value, obs) {
     const data = {
       "orden": row.orden.id,
       "empaque": row.empaque.codigo,
       "aprobado": row.aprobado,
-      "entregado": value
+      "entregado": value,
+      "observacion_retorno": obs
     }
     this.transaccionService.editOrdenEmpaque(data, row.id).subscribe(
       response => {
@@ -61,6 +62,20 @@ export class RetornosListComponent implements OnInit {
       },
       err => console.log(err)
     );
+  }
+
+  openRetornoPop(row, value) {
+    swal({
+        title: 'Observacion de retorno',
+        input: 'text',
+        showCancelButton: true,
+        confirmButtonText: 'Aprobar retorno',
+        showLoaderOnConfirm: true,
+        preConfirm: (observacion) => {
+            this.setRetorno(row, value, observacion);
+        },
+        allowOutsideClick: () => !swal.isLoading()
+    });
   }
 
   onActivate(event) {}
