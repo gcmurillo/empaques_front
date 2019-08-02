@@ -6,8 +6,15 @@
           <div class="project-table">
               <div id="crm-contact" class="dt-responsive">
                 <span class="m-b-20">Empaques por llenar</span><br><br>
+                <input
+                type="text"
+                class="form-control input-sm full-data-search"
+                placeholder="Buscar por codigo"
+                (keyup)="empaquesFilter($event)"
+                  />
                   <div class="table-responsive">
                       <ngx-datatable
+                        #empaques
                         class="data-table"
                         [rows]="rows"
                         [columnMode]="'force'"

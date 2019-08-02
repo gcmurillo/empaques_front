@@ -59,4 +59,8 @@ export class TransaccionesService {
         return this.http.get<OrdenEmpaqueDetailList[]>(myGlobals.apiURL + myGlobals.ENTREGAR_ORDENESEMPAQUES);
     }
 
+    public getTransaccionesPorVencer(): Observable<Orden[]> {
+        return this.http.get<Orden[]>(myGlobals.apiURL + myGlobals.LISTAR_TRANSACCIONES_POR_VENCER);
+    }
+
 }

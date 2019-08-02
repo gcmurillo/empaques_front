@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
 import {MenuItems} from '../../shared/menu-items/menu-items';
+import { TransaccionesService } from '../../services/transacciones/transacciones.service';
 
 @Component({
   selector: 'app-admin',
@@ -146,6 +147,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   public searchInterval: any;
 
   public tipo_usuario: any;
+  public ordenes_por_vencer: any;
 
   scroll = (): void => {
     const scrollPosition = window.pageYOffset;
@@ -166,7 +168,9 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(public menuItems: MenuItems) {
+  constructor(public menuItems: MenuItems,
+    private transaccionService: TransaccionesService,
+    ) {
     this.animateSidebar = '';
     this.navType = 'st2';
     this.themeLayout = 'vertical';
@@ -225,6 +229,14 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.setHeaderAttributes(this.windowWidth);
 
     this.tipo_usuario = (localStorage.getItem('tipo') === 'OP') ? 'Operaciones' : 'Comercial';
+
+    this.transaccionService.getTransaccionesPorVencer().subscribe(
+      transacciones => {
+        this.ordenes_por_vencer = transacciones;
+        console.log(transacciones);
+      },    
+      err => console.log('error: ' + err.status)
+    );
 
     // dark theme
     /*this.setLayoutType('dark');*/

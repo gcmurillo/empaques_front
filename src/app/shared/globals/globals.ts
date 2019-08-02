@@ -20,6 +20,7 @@ export const CREAR_EMPAQUES = 'api/empaques/crear/';
 export const CREAR_EMPAQUES_MULTIPLES = 'api/empaques/crear/upload/';
 export const LISTAR_TRANSACCIONES_NO_DESPACHADAS = 'api/ordenes/?tipo=1&despachado=False';
 export const LISTAR_TRANSACCIONES_TODAS = 'api/ordenes/?tipo=1';
+export const LISTAR_TRANSACCIONES_POR_VENCER = 'api/ordenes/por_vencer';
 export const LISTAR_TRANSACCIONES_DESPACHADAS = 'api/ordenes/?tipo=1&despachado=True';
 export const CREAR_TRANSACCION = 'api/ordenes/crear/';
 export const LISTAR_ORDENESEMPAQUES = 'api/ordenes/empaques/';
@@ -30,5 +31,5 @@ export const DESPACHAR_ORDENES = 'api/ordenes/despachar/';
 export const LOGIN = 'api/login/';
 
 export const sep = '/';
-export const apiURL = 'http://localhost:8000/';
-// export const apiURL = 'http://172.19.50.81:8000/';
+// export const apiURL = 'http://localhost:8000/';
+export const apiURL = 'http://172.19.50.81:8000/';

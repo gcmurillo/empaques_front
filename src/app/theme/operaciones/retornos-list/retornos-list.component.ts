@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TransaccionesService } from '../../../services/transacciones/transacciones.service';
 import { LoginService } from '../../../services/login/login.service';
 import swal from 'sweetalert2';
@@ -27,6 +27,8 @@ export class RetornosListComponent implements OnInit {
     totalMessage: " Ordenes"
   }
 
+  @ViewChild('tablaretornos') tablaEmpaques: any;
+
   constructor(private transaccionService: TransaccionesService,
               private loginService: LoginService,
               ) { }
@@ -35,6 +37,7 @@ export class RetornosListComponent implements OnInit {
     this.transaccionService.getOrdenesEmpaquesPorEntregar().subscribe(
       ordenes => { 
         this.rows = ordenes;
+        this.ordenes = ordenes;
       },
       err => console.log('error: ' + err.status)
     );
@@ -79,5 +82,19 @@ export class RetornosListComponent implements OnInit {
   }
 
   onActivate(event) {}
+
+  empaquesFilter(event) {
+    const val = event.target.value.toLowerCase();
+
+    // filter our data
+    const temp = this.ordenes.filter(function(d) {
+      return d.empaque.__str__.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    // update the rows
+    this.rows = temp;
+    // Whenever the filter changes, always go back to the first page
+    this.tablaEmpaques.offset = 0;
+  }
 
 }
