@@ -1,0 +1,163 @@
+<div class="card">
+    <div class="card-header">
+        <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="export()" style="margin-right: 10px">Exportar a EXCEL</button>
+        <input
+        type="text"
+        class="form-control input-sm full-data-search"
+        placeholder="Buscar por nombre"
+        (keyup)="updateFilter($event)"
+      />
+    </div>
+    <div class="card-header">
+        <form class="form-material" [formGroup]="filtroForm">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Tipo</label>
+                <div class="col-sm-4">
+                    <select name="select" class="form-control" formControlName="tipo">
+                        <option [value]=""></option>
+                        <option [value]="1">Transaccion</option>
+                        <option [value]="2">Transferencia</option>
+                    </select>
+                </div>
+                <label class="col-sm-2 col-form-label">Completo</label>
+                <div class="col-sm-4">
+                    <select name="select" class="form-control" formControlName="completo">
+                    <option [value]=""></option>
+                    <option [value]="true">Si</option>
+                    <option [value]="false">No</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Nuevo Custodio</label>
+                <div class="col-sm-4">
+                    <select name="select" class="form-control" formControlName="nuevo_custodio">
+                        <option [value]=""></option>
+                    <option [value]="custodio.id" *ngFor="let custodio of custodios">{{ custodio.__str__ }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Fecha Inicio desde</label>
+                <div class="col-sm-4">
+                <input type="text" class="form-control" (click)="fid.toggle()" placeholder="yyyy-mm-dd" ngbDatepicker #fid="ngbDatepicker" formControlName="fecha_inicio_desde">
+                </div>
+                <label class="col-sm-2 col-form-label">Fecha Inicio hasta</label>
+                <div class="col-sm-4">
+                <input type="text" class="form-control" (click)="fih.toggle()" placeholder="yyyy-mm-dd" ngbDatepicker #fih="ngbDatepicker" formControlName="fecha_inicio_hasta">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Fecha Despacho desde</label>
+                <div class="col-sm-4">
+                <input type="text" class="form-control" (click)="fdd.toggle()" placeholder="yyyy-mm-dd" ngbDatepicker #fdd="ngbDatepicker" formControlName="fecha_despacho_desde">
+                </div>
+                <label class="col-sm-2 col-form-label">Fecha Despacho hasta</label>
+                <div class="col-sm-4">
+                <input type="text" class="form-control" (click)="fdh.toggle()" placeholder="yyyy-mm-dd" ngbDatepicker #fdh="ngbDatepicker" formControlName="fecha_despacho_hasta">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Fecha Retorno desde</label>
+                <div class="col-sm-4">
+                <input type="text" class="form-control" (click)="frd.toggle()" placeholder="yyyy-mm-dd" ngbDatepicker #frd="ngbDatepicker" formControlName="fecha_retorno_desde">
+                </div>
+                <label class="col-sm-2 col-form-label">Fecha Retorno hasta</label>
+                <div class="col-sm-4">
+                <input type="text" class="form-control" (click)="frh.toggle()" placeholder="yyyy-mm-dd" ngbDatepicker #frh="ngbDatepicker" formControlName="fecha_retorno_hasta">
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary waves-effect waves-light f-right d-inline-block md-trigger" (click)="consultar()" style="margin-right: 10px">Consultar</button>
+        </form>
+    </div>
+    <div class="card-body">
+        <div class="table-content crm-table">
+            <div class="project-table">
+                <div id="crm-contact" class="dt-responsive">
+                    <div class="table-responsive">
+                        <ngx-datatable
+                        #myTable
+                          class="data-table expandable"
+                          [rows]="rows"
+                          [columnMode]="'force'"
+                          [scrollbarH]="true"
+                          [headerHeight]="50"
+                          [footerHeight]="50"
+                          [rowHeight]="'auto'"
+                          [limit]="10"
+                          [selected]="selected"
+                          (click)="onClickRow($event)"
+                          (activate)="onActivate($event)"
+                          (select)='onSelect($event)'>
+                        <!-- Row Detail Template -->
+                            <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
+                                <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                                <div class="dt-desc">
+                                    <table class="table-striped table-bordered">
+                                    <tr>
+                                        <th colspan="2"><strong>Empaques</strong></th>
+                                    </tr>
+                                    <tr *ngFor="let empaque of row.empaques">
+                                        <td>{{empaque.__str__}}</td>
+                                        <td>{{empaque.clase.nombre}}</td>
+                                    </tr>
+                                    </table>
+                                </div>
+                    
+                                </ng-template>
+                            </ngx-datatable-row-detail>
+                          <!-- Columns properties-->
+                          <ngx-datatable-column
+                            [width]="50"
+                            [resizeable]="false"
+                            [sortable]="false"
+                            [draggable]="false"
+                            [canAutoResize]="false">
+                            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                                <a
+                                href="javascript:;"
+                                [class.datatable-icon-right]="!expanded"
+                                [class.datatable-icon-down]="expanded"
+                                title="Expand/Collapse Row"
+                                (click)="toggleExpandRow(row)">
+                                </a>
+                            </ng-template>
+                            </ngx-datatable-column>
+                          <ngx-datatable-column name="Nombre" prop="nombre" ></ngx-datatable-column>
+                          <ngx-datatable-column name="Bodega" prop="nueva_ubicacion.bodega.nombre" ></ngx-datatable-column>
+                          <ngx-datatable-column name="Fecha Inicio" prop="fecha_inicio" ></ngx-datatable-column>
+                          <ngx-datatable-column name="Fecha Final" prop="fecha_final" ></ngx-datatable-column>
+                          <ngx-datatable-column name="Dias de Plazo" prop="dias_plazo" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  <strong>{{value}}</strong> dias
+                              </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Aprobado" prop="aprobado" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  <span *ngIf="!value"><label class="badge badge-danger">NO APROBADO</label></span>
+                                  <span *ngIf="value"><label class="badge badge-success">APROBADO</label></span>
+                              </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Fecha Aprobacion" prop="fecha_aprobacion" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  <span *ngIf="value">{{value}}</span>
+                                  <span *ngIf="!value">No Aprobado</span>
+                              </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Nuevo Custodio" prop="nuevo_custodio" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  {{ value.representante.nombre }} - {{ value.representante.empresa.nombre }}
+                              </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Vendedor" prop="nuevo_custodio" >
+                              <ng-template let-value="value" ngx-datatable-cell-template>
+                                  {{ value.vendedor.nombre }}
+                              </ng-template>
+                          </ngx-datatable-column>
+                        </ngx-datatable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

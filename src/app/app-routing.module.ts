@@ -38,6 +38,10 @@ const routes: Routes = [
             {
                 path: 'operaciones',
                 loadChildren: './theme/operaciones/operaciones.module#OperacionesModule'
+            },
+            {
+                path: 'reportes',
+                loadChildren: './theme/reportes/reportes.module#ReportesModule'
             }
         ]
     },

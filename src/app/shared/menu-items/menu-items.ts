@@ -1175,6 +1175,12 @@ const CO_MENU = [
                         name: 'Despachadas',
                     },
                 ]
+            },
+            {
+                state: 'reportes',
+                name: 'Reportes',
+                type: 'link',
+                icon: 'feather icon-users'
             }
         ]
     },

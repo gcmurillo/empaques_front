@@ -29,8 +29,9 @@ export const ENTREGAR_ORDENESEMPAQUES = 'api/ordenes/empaques/por_entregar/';
 export const CORREOS = 'api/correos/';
 export const DESPACHAR_ORDENES = 'api/ordenes/despachar/';
 export const LOGIN = 'api/login/';
+export const ORDENES_FILTRADO = 'api/ordenesFiltrado/';
 
 export const sep = '/';
-// export const apiURL = 'http://localhost:8000/';
-export const apiURL = 'http://172.19.50.81:8002/';
+export const apiURL = 'http://localhost:8000/';
+// export const apiURL = 'http://172.19.50.81:8002/';
 
