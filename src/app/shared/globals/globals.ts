@@ -32,6 +32,6 @@ export const LOGIN = 'api/login/';
 export const ORDENES_FILTRADO = 'api/ordenesFiltrado/';
 
 export const sep = '/';
-export const apiURL = 'http://localhost:8000/';
-// export const apiURL = 'http://172.19.50.81:8002/';
+// export const apiURL = 'http://localhost:8000/';
+export const apiURL = 'http://172.19.50.81:8002/';
 

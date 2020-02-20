@@ -147,7 +147,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   public searchInterval: any;
 
   public tipo_usuario: any;
-  public ordenes_por_vencer: any;
+  public ordenes_por_vencer = [];
 
   scroll = (): void => {
     const scrollPosition = window.pageYOffset;
