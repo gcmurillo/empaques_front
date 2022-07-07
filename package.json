@@ -50,7 +50,7 @@
     "jquery": "^3.4.1",
     "jszip": "^2.6.1",
     "jszip-utils": "^0.1.0",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "ng-click-outside": "^3.3.0",
     "ng-select": "^1.0.0-rc.5",
     "ng2-archwizard": "^2.1.0",
